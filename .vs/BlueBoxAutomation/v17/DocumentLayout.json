@@ -1,85 +1,89 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\",
+  "WorkspaceRootPath": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|c:\\users\\ora\\source\\repos\\blueboxautomation\\blueboxautomation\\promaxgui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\promaxgui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CAC25C4-40FF-42DC-95C5-492F1524F2EB}|AutomationRunner\\AutomationRunner.csproj|c:\\automation\\gui-automation-tool-using-teststack.white-for-wpf-apps\\automationrunner\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CAC25C4-40FF-42DC-95C5-492F1524F2EB}|AutomationRunner\\AutomationRunner.csproj|solutionrelative:automationrunner\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|c:\\users\\ora\\source\\repos\\blueboxautomation\\blueboxautomation\\pageobjects\\intensifmaxfacereadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\intensifmaxfacereadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\intensifmaxfacedefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|c:\\automation\\gui-automation-tool-using-teststack.white-for-wpf-apps\\blueboxautomation\\promaxgui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\promaxgui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\intensifmaxfacereadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\intensifmaxfacereadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\intensifmaxfacedefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\intensifmaxfacedefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\ifinemaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\ifinemaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\ifinemaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\smallmaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\smallmaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\smallmaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\contourmaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\contourmaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\contourmaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\shapermaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\shapermaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\shapermaxreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\minishapermaxfacereadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\minishapermaxfacereadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\minishapermaxfacereadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\minishapermaxbodyreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\minishapermaxbodyreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\minishapermaxbodyreadypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\smallmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\smallmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\smallmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\ifinemaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\ifinemaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\ifinemaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\fsrmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\fsrmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\fsrmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\contourmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\contourmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\contourmaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\shapermaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\shapermaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\shapermaxdefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\minishapermaxbodydefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\minishapermaxbodydefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\minishapermaxbodydefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\minishapermaxfacedefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\minishapermaxfacedefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\minishapermaxfacedefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\intensifmaxbodypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\intensifmaxbodypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\intensifmaxbodypage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\fsrmaxbodydefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\fsrmaxbodydefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\fsrmaxbodydefaultpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\blueboxautomation\\pageobjects\\settingsmode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\blueboxautomation\\pageobjects\\settingsmode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B23355A-DED7-4391-AB01-5642535A51E3}|BlueBoxAutomation\\BlueBoxAutomation.csproj|solutionrelative:blueboxautomation\\pageobjects\\settingsmode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -90,7 +94,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -98,41 +102,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IntensifMaxFaceReadyPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\IntensifMaxFaceReadyPage.cs",
-              "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\IntensifMaxFaceReadyPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\IntensifMaxFaceReadyPage.cs",
-              "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\IntensifMaxFaceReadyPage.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAcwGAAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-14T12:35:06.683Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PROMAXGUI.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PROMAXGUI.cs",
-              "RelativeDocumentMoniker": "BlueBoxAutomation\\PROMAXGUI.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PROMAXGUI.cs",
-              "RelativeToolTip": "BlueBoxAutomation\\PROMAXGUI.cs",
-              "ViewState": "AQIAAAsEAAAAAAAAAAAYwDcEAAA5AAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\AutomationRunner\\Program.cs",
+              "RelativeDocumentMoniker": "AutomationRunner\\Program.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\AutomationRunner\\Program.cs",
+              "RelativeToolTip": "AutomationRunner\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T12:02:41.377Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TestBase.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\TestBase.cs",
-              "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\TestBase.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\TestBase.cs",
-              "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\TestBase.cs",
-              "ViewState": "AQIAAM4BAAAAAAAAAAAwwNsBAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-15T12:01:35.673Z",
+              "WhenOpened": "2025-11-12T12:00:11.288Z",
               "EditorCaption": ""
             },
             {
@@ -141,24 +119,61 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SmallMaxReadyPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\SmallMaxReadyPage.cs",
-              "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\SmallMaxReadyPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\SmallMaxReadyPage.cs",
-              "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\SmallMaxReadyPage.cs",
-              "ViewState": "AQIAAMIAAAAAAAAAAADwv+kAAAAhAAAA",
+              "DocumentIndex": 3,
+              "Title": "IntensifMaxFaceReadyPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\IntensifMaxFaceReadyPage.cs",
+              "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\IntensifMaxFaceReadyPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\IntensifMaxFaceReadyPage.cs",
+              "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\IntensifMaxFaceReadyPage.cs",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAcwGAAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T06:44:32.336Z",
+              "WhenOpened": "2025-07-14T12:35:06.683Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PROMAXGUI.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PROMAXGUI.cs",
+              "RelativeDocumentMoniker": "BlueBoxAutomation\\PROMAXGUI.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PROMAXGUI.cs",
+              "RelativeToolTip": "BlueBoxAutomation\\PROMAXGUI.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:02:41.377Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 1,
+              "Title": "TestBase.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\TestBase.cs",
+              "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\TestBase.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\TestBase.cs",
+              "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\TestBase.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAAwDsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-15T12:01:35.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SmallMaxReadyPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\SmallMaxReadyPage.cs",
+              "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\SmallMaxReadyPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\SmallMaxReadyPage.cs",
+              "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\SmallMaxReadyPage.cs",
+              "ViewState": "AQIAAMIAAAAAAAAAAADwv+kAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T06:44:32.336Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "MiniShaperMaxBodyReadyPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyReadyPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyReadyPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyReadyPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyReadyPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyReadyPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyReadyPage.cs",
               "ViewState": "AQIAAJgAAAAAAAAAAAAAwKoAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -166,24 +181,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "IntensifMaxFaceDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\IntensifMaxFaceDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\IntensifMaxFaceDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\IntensifMaxFaceDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\IntensifMaxFaceDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\IntensifMaxFaceDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\IntensifMaxFaceDefaultPage.cs",
               "ViewState": "AQIAAPMAAAAAAAAAAAAAAGwAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T12:17:05.474Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T12:17:05.474Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ShaperMaxReadyPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\ShaperMaxReadyPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\ShaperMaxReadyPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\ShaperMaxReadyPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\ShaperMaxReadyPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\ShaperMaxReadyPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\ShaperMaxReadyPage.cs",
               "ViewState": "AQIAAOMAAAAAAAAAAAAswPYAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -191,24 +205,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "iFineMaxReadyPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\iFineMaxReadyPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\iFineMaxReadyPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\iFineMaxReadyPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\iFineMaxReadyPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\iFineMaxReadyPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\iFineMaxReadyPage.cs",
               "ViewState": "AQIAAJQAAAAAAAAAAAAwwLUAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T06:43:13.353Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T06:43:13.353Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ContourMaxReadyPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\ContourMaxReadyPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\ContourMaxReadyPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\ContourMaxReadyPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\ContourMaxReadyPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\ContourMaxReadyPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\ContourMaxReadyPage.cs",
               "ViewState": "AQIAAG4AAAAAAAAAAADwv40AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -216,11 +229,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "MiniShaperMaxFaceReadyPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceReadyPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceReadyPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceReadyPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceReadyPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceReadyPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceReadyPage.cs",
               "ViewState": "AQIAAJUAAAAAAAAAAAAAwKcAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -228,11 +241,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "SmallMaxDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\SmallMaxDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\SmallMaxDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\SmallMaxDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\SmallMaxDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\SmallMaxDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\SmallMaxDefaultPage.cs",
               "ViewState": "AQIAABMAAAAAAAAAAADwvycAAABWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -240,11 +253,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "iFineMaxDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\iFineMaxDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\iFineMaxDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\iFineMaxDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\iFineMaxDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\iFineMaxDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\iFineMaxDefaultPage.cs",
               "ViewState": "AQIAACMAAAAAAAAAAAAkwFUAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -252,11 +265,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "FSRMaxDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\FSRMaxDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\FSRMaxDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\FSRMaxDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\FSRMaxDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\FSRMaxDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\FSRMaxDefaultPage.cs",
               "ViewState": "AQIAACkAAAAAAAAAAAAQwEwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -264,11 +277,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "ContourMaxDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\ContourMaxDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\ContourMaxDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\ContourMaxDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\ContourMaxDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\ContourMaxDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\ContourMaxDefaultPage.cs",
               "ViewState": "AQIAADMAAAAAAAAAAAAiwEIAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -276,11 +289,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "ShaperMaxDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\ShaperMaxDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\ShaperMaxDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\ShaperMaxDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\ShaperMaxDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\ShaperMaxDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\ShaperMaxDefaultPage.cs",
               "ViewState": "AQIAADoAAAAAAAAAAAAuwEMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -288,11 +301,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "MiniShaperMaxBodyDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\MiniShaperMaxBodyDefaultPage.cs",
               "ViewState": "AQIAACkAAAAAAAAAAAAqwDQAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -300,11 +313,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "MiniShaperMaxFaceDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\MiniShaperMaxFaceDefaultPage.cs",
               "ViewState": "AQIAACsAAAAAAAAAAAAMwFAAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -312,11 +325,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "IntensifMaxBodyPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\IntensifMaxBodyPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\IntensifMaxBodyPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\IntensifMaxBodyPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\IntensifMaxBodyPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\IntensifMaxBodyPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\IntensifMaxBodyPage.cs",
               "ViewState": "AQIAADYAAAAAAAAAAAAuwD8CAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -324,11 +337,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "FSRMaxBodyDefaultPage.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\FSRMaxBodyDefaultPage.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\FSRMaxBodyDefaultPage.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\FSRMaxBodyDefaultPage.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\FSRMaxBodyDefaultPage.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\FSRMaxBodyDefaultPage.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\FSRMaxBodyDefaultPage.cs",
               "ViewState": "AQIAAI8AAAAAAAAAAAAEwKIAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -336,11 +349,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "SettingsMode.cs",
-              "DocumentMoniker": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\SettingsMode.cs",
+              "DocumentMoniker": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\SettingsMode.cs",
               "RelativeDocumentMoniker": "BlueBoxAutomation\\PageObjects\\SettingsMode.cs",
-              "ToolTip": "C:\\Users\\ora\\source\\repos\\BlueBoxAutomation\\BlueBoxAutomation\\PageObjects\\SettingsMode.cs",
+              "ToolTip": "C:\\automation\\GUI-Automation-Tool-using-TestStack.White-for-WPF-apps\\BlueBoxAutomation\\PageObjects\\SettingsMode.cs",
               "RelativeToolTip": "BlueBoxAutomation\\PageObjects\\SettingsMode.cs",
               "ViewState": "AQIAACAAAAAAAAAAAAAAACkAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

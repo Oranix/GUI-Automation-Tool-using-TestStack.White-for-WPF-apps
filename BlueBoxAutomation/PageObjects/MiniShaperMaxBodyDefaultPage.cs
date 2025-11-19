@@ -154,7 +154,7 @@ namespace BlueBoxAutomation
         }
 
         public string PassesControledByUser_Minus()
-        {
+        {         
             ClickOnPassesMinus(15);
 
             if (MiniShaperPassesMinimumValue.Text.Equals("0"))

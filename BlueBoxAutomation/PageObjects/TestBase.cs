@@ -22,6 +22,8 @@ using System.Reflection;
 
 namespace BlueBoxAutomation
 {
+
+
     [TestClass]
     public class TestBase
     {
@@ -32,7 +34,10 @@ namespace BlueBoxAutomation
         public static List<TestStack.White.UIItems.WindowItems.Window> Windows; //Public field
 
         public Label PlusePasses => window.Get<Label>(SearchCriteria.ByText("+").AndIndex(0));
-        //public Label MinusPasses => window.Get<Label>(SearchCriteria.ByText("−")); ////Element not found :(
+
+        //public Label MinusPasses => window.Get<Label>(SearchCriteria.ByText("−").AndIndex(6)); ////Element not found :(
+        public Label MinusPassesiFine => window.Get<Label>(SearchCriteria.ByClassName("TextBlock").AndIndex(10));  //MinusIFine
+
         public Label PlusePower => window.Get<Label>(SearchCriteria.ByText("+").AndIndex(1));
         public Button ReturnBtn => window.Get<Button>(SearchCriteria.ByAutomationId(""));
         public Label PopUpMessage => window.Get<Label>(SearchCriteria.ByText("Handpiece was disconnected. Press OK to continue."));
@@ -47,11 +52,10 @@ namespace BlueBoxAutomation
         public Label STOP => window.Get<Label>(SearchCriteria.ByText("STOP"));
 
 
-
+        public int DecreaseButtonYlocation = 420;
         public bool csvFlag = false;
 
-        [AssemblyInitialize]
-        public static void SetUp(TestContext context)
+        public static void SetUpForRunner()
         {
             application = TestStack.White.Application.Launch(@"D:\App\NewProGUI.exe");
             Thread.Sleep(3000);
@@ -70,6 +74,7 @@ namespace BlueBoxAutomation
             Mouse.Instance.Click();
             Thread.Sleep(500); // Optional delay to stabilize UI interaction
         }
+
         public void ReturntoMain()
         {
             try
@@ -85,6 +90,7 @@ namespace BlueBoxAutomation
                 Thread.Sleep(2000);
             }
         }
+
         public void ClickOnPassesPluse(int passesMaxValue)
         {
             for (int i = 0; i < passesMaxValue; i++)
@@ -92,13 +98,18 @@ namespace BlueBoxAutomation
                 ClickOnScreen((int)PlusePasses.Location.X, (int)PlusePasses.Location.Y);
             }
         }
-        public void ClickOnPassesMinus(int passesMinValue)   ////To find Minus : Add 348 to the pluse (Y) location
+
+        public void ClickOnPassesMinus(int passesMinValue)   ////To find Minus : add Y (+) by 348 to the get (Y) location
         {
+            var DecreaseButton = window.Get(SearchCriteria.ByAutomationId("DecreaseButton")); //Parent
+            var AllChildren = DecreaseButton.GetMultiple(SearchCriteria.All);       //Search all children
             for (int i = 0; i < passesMinValue; i++)
             {
-                ClickOnScreen((int)PlusePasses.Location.X, (int)PlusePasses.Location.Y + 348);
+                AllChildren[0].Click();
+                //ClickOnScreen((int)PlusePasses.Location.X, (int)PlusePasses.Location.Y + DecreaseButtonYlocation);  //348
             }
         }
+
         public void ClickOnPowerPluse(int powerMaxValue)
         {
             for (int i = 0; i < powerMaxValue; i++)
@@ -106,50 +117,71 @@ namespace BlueBoxAutomation
                 ClickOnScreen((int)PlusePower.Location.X, (int)PlusePower.Location.Y);
             }
         }
+
         public void ClickOnPowerMinus(int powerMinValue)
         {
+            var DecreaseButton = window.Get(SearchCriteria.ByAutomationId("PowerSelector")); //Parent
+            var AllChildren = DecreaseButton.GetMultiple(SearchCriteria.All);       //Search all children
             for (int i = 0; i < powerMinValue; i++)
             {
-                ClickOnScreen((int)PlusePower.Location.X, (int)PlusePower.Location.Y + 348);
+                AllChildren[20].Click();
+                //ClickOnScreen((int)PlusePower.Location.X, (int)PlusePower.Location.Y + DecreaseButtonYlocation); // 345
             }
         }
 
         public void ClickOnPWPluse(int PWMaxValue)
         {
+            var XlocationValue = ((int)PlusePasses.Location.X);
+            var YlocationValue = ((int)PlusePasses.Location.Y);
+
             for (int i = 0; i < PWMaxValue; i++)
             {
-                ClickOnScreen((int)PlusePasses.Location.X, (int)PlusePasses.Location.Y);
+                ClickOnScreen(XlocationValue, YlocationValue);
             }
         }
+
         public void ClickOnPWMinus(int PWMinValue)   ////To find Minus : Add 405 to the pluse (Y) location
         {
+            var DecreaseButton = window.Get(SearchCriteria.ByAutomationId("WidthSelector")); //Parent
+            var AllChildren = DecreaseButton.GetMultiple(SearchCriteria.All);       //Search all children
             for (int i = 0; i < PWMinValue; i++)
             {
-                ClickOnScreen((int)PlusePasses.Location.X, (int)PlusePasses.Location.Y + 405);
+                AllChildren[29].Click();
+                //ClickOnScreen((int)PlusePasses.Location.X, (int)(PlusePasses.Location.Y + 405));
             }
         }
 
         public void ClickOnPowerMinusIntensif(int powerMinValue)   ////To find Minus : Add 405 to the pluse (Y) location
         {
+            var DecreaseButton = window.Get(SearchCriteria.ByAutomationId("PowerSelector")); //Parent
+            var AllChildren = DecreaseButton.GetMultiple(SearchCriteria.All);       //Search all children
             for (int i = 0; i < powerMinValue; i++)
             {
-                ClickOnScreen((int)PlusePower.Location.X, (int)PlusePower.Location.Y + 405);
+                AllChildren[29].Click();
+                //ClickOnScreen((int)PlusePower.Location.X, (int)(PlusePower.Location.Y + 405));
             }
         }
 
         public void ClickOnDepthPluse(int depthMaxValue)
         {
+            var DecreaseButton = window.Get(SearchCriteria.ByAutomationId("DepthSelector")); //Parent
+            var AllChildren = DecreaseButton.GetMultiple(SearchCriteria.All);       //Search all children
             for (int i = 0; i < depthMaxValue; i++)
             {
-                ClickOnScreen((int)PlusePower.Location.X - 204, (int)PlusePower.Location.Y);
+                AllChildren[3].Click();
+                //ClickOnScreen((int)(PlusePower.Location.X - 204), (int)PlusePower.Location.Y);
             }
 
         }
+
         public void ClickOnDepthMinus(int depthMinValue)
         {
+            var DecreaseButton = window.Get(SearchCriteria.ByAutomationId("DepthSelector")); //Parent
+            var AllChildren = DecreaseButton.GetMultiple(SearchCriteria.All);       //Search all children
             for (int i = 0; i < depthMinValue; i++)
             {
-                ClickOnScreen((int)PlusePower.Location.X - 204, (int)PlusePower.Location.Y + 347);
+                AllChildren[20].Click();
+                //ClickOnScreen((int)(PlusePower.Location.X - 204), (int)(PlusePower.Location.Y + 347));
             }
         }
 
@@ -418,7 +450,7 @@ namespace BlueBoxAutomation
 
         //INSPECT FOR INTERVAL NAME
         public string GetCurrentIntervalTimeValue()
-        {           
+        {
             //var intervalEnds = Retry.For(() => window.Get<Label>(SearchCriteria.ByClassName("TextBlock").AndIndex(11)), TimeSpan.FromMilliseconds(100));
 
             var PulseControl = Retry.For(() => window.Get(SearchCriteria.ByAutomationId("PulseControl")), TimeSpan.FromMilliseconds(100)); //Parent
@@ -429,7 +461,7 @@ namespace BlueBoxAutomation
             return ((Label)intervalEnds).Text.Trim();
 
 
-            //if (index >= 0)   למציאת הילד הבא לפי אינדקס
+            //if (index >= 0) למציאת הילד הבא לפי אינדקס
             //{
             //    Console.WriteLine("המספר הראשון שנמצא: " + AllChildren[index].Name);
 
@@ -447,7 +479,7 @@ namespace BlueBoxAutomation
             //    Console.WriteLine("לא נמצא אלמנט עם מספר.");
             //}
         }
-          
+
         public string UploadLogs()
         {
             ClickOnScreen((int)ReturnBtn.Location.X, (int)ReturnBtn.Location.Y);
@@ -487,7 +519,7 @@ namespace BlueBoxAutomation
             while (true)
             {
                 var currentValue = GetCurrentIntervalTimeValue();
-               
+
                 if (currentValue == "0")
                 {
                     Thread.Sleep(1000);
@@ -543,6 +575,6 @@ namespace BlueBoxAutomation
         {
             application?.Close();
             application?.Dispose();
-       }
+        }
     }
 }

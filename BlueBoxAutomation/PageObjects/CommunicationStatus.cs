@@ -20,7 +20,7 @@ namespace BlueBoxAutomation
 
             if (value)
             {
-                var timeout = DateTime.Now.AddSeconds(20);
+                var timeout = DateTime.Now.AddSeconds(25);
                 while (DateTime.Now < timeout)
                 {
                     try

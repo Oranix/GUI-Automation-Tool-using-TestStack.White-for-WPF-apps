@@ -135,7 +135,7 @@ namespace BlueBoxAutomation.PageObjects
             //CSVOpenCheck();   //Open CSV file for measuring the outputpower from the Scope
             ClickOnScreen((int)PeriorbitalIfine.Location.X, (int)PeriorbitalIfine.Location.Y);
             Thread.Sleep(500);
-            ClickOnPowerMinus(2); // Start from power power 1
+            ClickOnPowerMinus(2); // Start from power  1W
             Thread.Sleep(1000);
 
             for (int expectedPower = 1; expectedPower <= 6; expectedPower++)
