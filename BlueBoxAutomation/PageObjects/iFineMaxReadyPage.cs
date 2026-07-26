@@ -72,22 +72,24 @@ namespace BlueBoxAutomation.PageObjects
 
         public void IFineMAX()
         {
+            Thread.Sleep(1000);
+
             IfineMaxBtn.Click();
-            Thread.Sleep(2500);
         }
 
         public string PeriorbitalDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
+            Thread.Sleep(1000);
+
             ClickOnScreen((int)PeriorbitalIfine.Location.X, (int)PeriorbitalIfine.Location.Y);
-            Thread.Sleep(500);
-            PressingStart();   //Start button
+            PressStartAndWaitReady();   //Start button
 
             var textPasses = PeriorbitalIfinePasses.Text;
             var textPower = PeriorbitalIfinePower.Text;
-            var textIntervalTime = saveIntervalTime.Text;
+            var textIntervalTime = /*saveIntervalTime.Text*/ GetCurrentIntervalTimeValue();
             if (DefaultsPasses[0] == textPasses && DefaultsPower[0] == textPower && DefaultsIntervalTime[0] == textIntervalTime)
             {
-                PressingStop();  //Stop button
+                PressStopAndWaitStandby();  //Stop button
                 return "Defaults are OK!";
             }
             else
@@ -97,16 +99,17 @@ namespace BlueBoxAutomation.PageObjects
         }
         public string PerioralDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
+            Thread.Sleep(1000);
+
             ClickOnScreen((int)Perioralfine.Location.X, (int)Perioralfine.Location.Y);
-            Thread.Sleep(500);
-            PressingStart();   //Start button
+            PressStartAndWaitReady();   //Start button
 
             var textPasses = PerioralIfinePasses.Text;
             var textPower = PerioralIfinePower.Text;
-            var textIntervalTime = saveIntervalTime.Text;
+            var textIntervalTime = /*saveIntervalTime.Text*/ GetCurrentIntervalTimeValue();
             if (DefaultsPasses[1] == textPasses && DefaultsPower[1] == textPower && DefaultsIntervalTime[1] == textIntervalTime)
             {
-                PressingStop();  //Stop button
+                PressStopAndWaitStandby();  //Stop button
                 return "Defaults are OK!";
             }
             else
@@ -121,7 +124,16 @@ namespace BlueBoxAutomation.PageObjects
             PressingStart();   //Start button
             if (LedON.Text.Equals("STOP"))
             {
-                return true;
+                var LED = ConnectDeviceWindow.ShowDialogWindow("IS THE HP LED ON ?");
+                if (LED == true)
+                {
+                    PressingStop();  //Stop button
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -133,21 +145,41 @@ namespace BlueBoxAutomation.PageObjects
         {
             int successfulPowerLevels = 0;
             //CSVOpenCheck();   //Open CSV file for measuring the outputpower from the Scope
-            ClickOnScreen((int)PeriorbitalIfine.Location.X, (int)PeriorbitalIfine.Location.Y);
-            Thread.Sleep(500);
+
+            var timeout = DateTime.Now.AddSeconds(10);
+            while (DateTime.Now < timeout)
+            {
+                try
+                {
+                    ClickOnScreen((int)PeriorbitalIfine.Location.X, (int)PeriorbitalIfine.Location.Y);
+                    break;
+                }
+                catch { /*ignore*/ }
+       
+                    Thread.Sleep(250); //debounce every 250 ms
+            }
+            if (DateTime.Now == timeout)
+            {
+                throw new Exception("Timeout done for trying to click Periorbital area");
+            }
+
             ClickOnPowerMinus(2); // Start from power  1W
-            Thread.Sleep(1000);
+
+            //Thread.Sleep(500);
+
+            //var RF = ConnectDeviceWindow.ShowDialogWindow("Testit RF Power in 1 - 6  Watt");
 
             for (int expectedPower = 1; expectedPower <= 6; expectedPower++)
             {
                 if (GetCurrentPowerValue() == expectedPower.ToString())
                 {
-                    PressingStart();  // Start button
                     Thread.Sleep(500);
+                    PressStartAndWaitReady();  // Start button
+                    //Thread.Sleep(5000);  //wait after state machine stablizing 
 
                     while (true)
                     {
-                        var currentValue = GetCurrentIntervalTimeValue();
+                        var currentValue = GetCurrentIntervalTimeValue(); 
 
                         if (currentValue == "0")
                         {
@@ -163,8 +195,7 @@ namespace BlueBoxAutomation.PageObjects
                         }
                     }
 
-                    PressingStop();  // Stop button
-                    Thread.Sleep(1000);
+                    PressStopAndWaitStandby();  // Stop button
                     ClickOnPowerPluse(1); // Move to the next power level
                 }
             }

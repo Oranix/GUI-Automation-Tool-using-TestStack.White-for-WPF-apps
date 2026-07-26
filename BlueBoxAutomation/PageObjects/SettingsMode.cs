@@ -1,32 +1,47 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows.Media;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.WPFUIItems;
+using TestStack.White.Utility;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace BlueBoxAutomation.PageObjects
 {
-    internal class SettingsMode : TestBase
+    internal class SettingsMode : TestBase 
     {
+
+        public SettingsMode(List<string> errors)
+        {
+            Errors = errors;
+        }
+
+
+
+        public string[] Area { get; set; }
         public Label SystemInformation => window.Get<Label>(SearchCriteria.ByText("System Information"));
-        public Label GuiVersionNumber => window.Get<Label>(SearchCriteria.ByText("01.05.13")/*.AndIndex(8)*/);
+        public Label GuiVersionNumber => window.Get<Label>(SearchCriteria.ByText("01.06.05")/*.AndIndex(8)*/);
         public Label FWVersionNumber => window.Get<Label>(SearchCriteria.ByText("01.00.00")/*.AndIndex(13)*/);
         public Label FPGAVersionNumber => window.Get<Label>(SearchCriteria.ByText("")/*.AndIndex(17)*/);
         public Label NotConnectedFPGAVersionNumber => window.Get<Label>(SearchCriteria.ByText("")/*.AndIndex(17)*/);
         public Label SystemSerial => window.Get<Label>(SearchCriteria.ByClassName("TextBlock").AndIndex(27));
         public Label Password => window.Get<Label>(SearchCriteria.ByText("Password"));
         public Label CurrentPasswordTab => window.Get<Label>(SearchCriteria.ByText("CURRENT PASSWORD"));
-        public Button one => window.Get<Button>(SearchCriteria.ByText("Button").AndIndex(2));  // 2 = 1digit
-        public Button two => window.Get<Button>(SearchCriteria.ByText("Button").AndIndex(3));  //3 = 2digit
-        public Button seven => window.Get<Button>(SearchCriteria.ByText("Button").AndIndex(9));  // 9 = 7digit
-        public Button eight => window.Get<Button>(SearchCriteria.ByText("Button").AndIndex(10));  // 10 = 8digit
+        public Button one => window.Get<Button>(SearchCriteria.ByText("Button").AndIndex(2));
+        public Button two => window.Get<Button>(SearchCriteria.ByText("Button").AndIndex(3));
+        public Button sevenDig => window.Get<Button>(SearchCriteria.ByText("Button").AndIndex(7));   // Index 7 give the digit 7
+        public Button eightDig => window.Get<Button>(SearchCriteria.ByText("Button").AndIndex(8));   // Index 8 give the digit 8
         public Label SavePassword => window.Get<Label>(SearchCriteria.ByText("SAVE PASSWORD"));
         public Label PasswordConfirmationMessage => window.Get<Label>(SearchCriteria.ByText("Password changed successfully!"));
         public Label InvalidSerialNumberMessage => window.Get<Label>(SearchCriteria.ByText("Invalid serial number!"));
@@ -35,7 +50,9 @@ namespace BlueBoxAutomation.PageObjects
         public Label SerialNumberMessage => window.Get<Label>(SearchCriteria.ByText("Serial number updated"));
         public Label CalibrationValueLabel => window.Get<Label>(SearchCriteria.ByText("CALIBRATION VALUE"));
         public Label SaveSNButton => window.Get<Label>(SearchCriteria.ByText("SAVE"));  // save button
+        public Button SettingsMenuButton => window.Get<Button>(SearchCriteria.ByAutomationId("SettingsMenuButton"));
 
+        public List<string> Errors { get; }
 
         public void AllSystemInformationDisplay()
         {
@@ -87,27 +104,49 @@ namespace BlueBoxAutomation.PageObjects
             //43 WPFLabel.AutomationId:, Name: SAVE, ControlType: text, FrameworkId: WPF
             //44 WPFLabel.AutomationId:, Name: Español, ControlType: text, FrameworkId: WPF
 
+
+
+
         }
 
         public bool GetToSettingsMode()
         {
-            ClickOnScreen((int)ReturnBtn.Location.X, (int)ReturnBtn.Location.Y);
-            Thread.Sleep(2000);
-
-            if (SystemInformation != null)
+            SettingsMenuButton.Click();
+            try
+            {
+                Retry.For(() => Password != null && Password.Visible, TimeSpan.FromSeconds(5));
                 return true;
-            return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public string GUIATMELVersionsCheck(string guiVersionNumber, string AtmelVersionNumner)
+        public string GUISWVersion(string guiVersionNumber)
         {
-            Console.WriteLine("GuiVersionNumber " + GuiVersionNumber.Text);
-            Console.WriteLine("FWVersionNumber " + FWVersionNumber.Text);
+            bool GUIOK = false;
+            SystemInformation.Click();
+            Thread.Sleep(1000);
+            Retry.For(() =>
+            {
+                try
+                {
+                    if (!GuiVersionNumber.Visible || GuiVersionNumber.Text != guiVersionNumber)
+                        return false; // for Retry func
+                    GUIOK = true;
+                    return true;
 
-            if (guiVersionNumber != GuiVersionNumber.Text || AtmelVersionNumner != FWVersionNumber.Text)
-                return "GUI and Atmel are up to date";
-            else return "GUI and Atmel are not up to date";
+                }
+                catch
+                {
+                    return false;
+                }
+            }, TimeSpan.FromSeconds(10));
 
+            if (!GUIOK)
+                return "GUI is NOT in the last version";
+            return "GUI is in the last version";
         }
 
         public string FPGAVersionCheck(bool communicationStatus, string FPGAVersion)
@@ -143,37 +182,40 @@ namespace BlueBoxAutomation.PageObjects
                 return "Wrong format";
         }
 
-        public string ChangeLoginPassword()
+        public string OpenPasswordMenu()
         {
-            Password.Click();
-            Thread.Sleep(500);
-            ClickOnScreen((int)CurrentPasswordTab.Location.X + 20, (int)CurrentPasswordTab.Location.Y + 50);   //Current password tab location
-            //var currentPasswordTab = window.Get(SearchCriteria.ByAutomationId("").AndIndex(10));   //Current password tab
-            //currentPasswordTab.Click();         
-            EnterDigits(one);
-
-            ClickOnScreen((int)CurrentPasswordTab.Location.X + 20, (int)CurrentPasswordTab.Location.Y + 150);   //Current password tab location
-            //var newPasswordTab = window.Get(SearchCriteria.ByAutomationId("").AndIndex(14));    //New password tab
-            //newPasswordTab.Click();
-            EnterDigits(two);
-
-            //var confirmPasswordTab = window.Get(SearchCriteria.ByAutomationId("").AndIndex(24));   //Confirm password tab
-            //confirmPasswordTab.Click();
-            ClickOnScreen((int)CurrentPasswordTab.Location.X + 20, (int)CurrentPasswordTab.Location.Y + 250);   //Current password tab location
-            EnterDigits(two);
-
-            ClickOnScreen((int)SavePassword.Location.X + 50, (int)SavePassword.Location.Y + 50);   //Save password button
-            okButton.Click();
-            Thread.Sleep(1000);
-
-            Console.WriteLine(PasswordConfirmationMessage.Text);
-            if (PasswordConfirmationMessage.Text.Equals("Password changed successfully!"))
+            Retry.For(() =>
             {
-                okButton.Click();
-                return "Password changed successfully!";
-            }
-            else
-                return "Password not changed";
+                try
+                {
+                    if (!Password.Visible || !Password.Enabled)
+                        return false; // for Retry func
+
+                    Password.Click();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }, TimeSpan.FromSeconds(10));
+
+            //Check the text after password button is pressed
+            Retry.For(() =>
+            {
+                try
+                {
+                    if (!CurrentPasswordTab.Visible)
+                        return false; // for Retry func
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }, TimeSpan.FromSeconds(10));
+
+            return "Password reset menu is open";
         }
 
         public void EnterDigits(IUIItem digitButton)
@@ -182,21 +224,39 @@ namespace BlueBoxAutomation.PageObjects
                 digitButton.Click();
         }
 
-        public void EnterSNAndCalPassword() //Enter 787878  
+        public string OpenSerialAndCalibrationMenu() //Enter 787878  
         {
             ClickOnScreen((int)CurrentPasswordTab.Location.X + 20, (int)CurrentPasswordTab.Location.Y + 50);   //Current password tab location
             for (int i = 0; i < 3; i++)
             {
-                seven.Click();
-                Thread.Sleep(300);
-                eight.Click();
-            }
-        }
+                ClickOnScreen((int)SavePassword.Location.X - 200, (int)SavePassword.Location.Y + 20);   //7 button 
+                //sevenDig.Click();
+                Thread.Sleep(500);
+                //eightDig.Click();
+                ClickOnScreen((int)SavePassword.Location.X -150, (int)SavePassword.Location.Y + 20);   //8 button 
 
+            }
+
+            Retry.For(() =>
+            {
+                try
+                {
+                    if (!CalibrationValueLabel.Visible)
+                        return false;
+                    return true;
+
+                }
+                catch
+                {
+                    return false;
+                }
+            }, TimeSpan.FromSeconds(10));
+
+            return "Serial and camera cal. bars are open";
+
+        }
         public string SystemSerialNumberAndCalibrationMenu()
         {
-
-            EnterSNAndCalPassword();
             ClickOnScreen((int)SaveSNButton.Location.X + 20, (int)SaveSNButton.Location.Y + 30);    //Press save button in serial number area
             if (InvalidSerialNumberMessage.Text.Equals("Invalid serial number!"))
             {
@@ -207,27 +267,45 @@ namespace BlueBoxAutomation.PageObjects
                 return "Error with the Serial & Cal. menu";
         }
 
-        public string EnterSNnumber()
+        public bool EnterSNnumber()
         {
-            EnterSNAndCalPassword();
+            //EnterSNAndCalPassword();
             ClickOnScreen((int)SaveSNButton.Location.X - 60, (int)SaveSNButton.Location.Y + 40);    //Press SN tab
-            //var SNTab = window.Get(SearchCriteria.ByAutomationId("").AndIndex(33));   //Current password tab
-            //SNTab.Click();
-            System.Windows.MessageBoxResult scanner = System.Windows.MessageBox.Show(
-                          "Please connect barcode sacnner and scan 10 digits system serial number.\nPress OK after the serial is enterd!",
-                          "Connect Device", System.Windows.MessageBoxButton.OKCancel, System.Windows.MessageBoxImage.Information);
+
+            var connectBarcodeDevice = ConnectDeviceWindow.ShowDialogWindow("Scan the “Barcode” from the P/N and S/N label (the label for illustration only) and press the “SAVE S/N” icon - Press OK after the serial is enterd!");
+       
             ClickOnScreen((int)SaveSNButton.Location.X + 20, (int)SaveSNButton.Location.Y + 30);    //Press save button in serial number area
-            if(SerialnumberupdatedMessage.Text.Equals("Serial number updated"))
+       
+            while (true)
             {
-                okButton.Click();
-                return "Error with entering serial number";
-            }
-            else
-            {
-                return "Serial number updated";
+                try
+                {
+                    if (SerialnumberupdatedMessage.Text.Equals("Serial number updated"))
+                    {
+                        Thread.Sleep(1000);
+                        okButton.Click();
+                        SystemInformation.Click();
+                        var VerifySerialNumber = ConnectDeviceWindow.ShowDialogWindow("Verify scanned S/N matches the S/N on the label, as shown in the image.");
+                        return true;
+                    }
+                }
+                catch
+                {
+                    okButton.Click();
+                    OpenSerialAndCalibrationMenu();                    
+                    ClickOnScreen((int)SaveSNButton.Location.X - 60, (int)SaveSNButton.Location.Y + 40);    //Press SN tab
+                    var repeatScaning = ConnectDeviceWindow.ShowDialogWindow("Wrong serial number - please enter serial number correctlly");
+                    ClickOnScreen((int)SaveSNButton.Location.X - 60, (int)SaveSNButton.Location.Y + 40);    //Press SN tab
+                    ClickOnScreen((int)SaveSNButton.Location.X + 20, (int)SaveSNButton.Location.Y + 30);    //Press save button in serial number area
+                }
             }
 
         }
+
+
     }
+
+
 }
+
 

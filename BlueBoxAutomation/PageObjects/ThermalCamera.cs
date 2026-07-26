@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.WPFUIItems;
 
 namespace BlueBoxAutomation
 {
@@ -21,45 +23,85 @@ namespace BlueBoxAutomation
         public Label thermalCameraCalibrationWarningMsg => window.Get<Label>(SearchCriteria.ByText("Warning"));
         public Label thermalCameraExitBtn => window.Get<Label>(SearchCriteria.ByText(""));
 
-        public string ThermalCameraOnOff()
+        public string ThermalCameraEnable()
         {
             ThermalCameraSwitch.Click();    ////Open camera window
-
-
+            bool isCameraOpen = WaitUntil(() => ThermalCameraFUSION != null, 5000, "Cmera window is not open");
             Thread.Sleep(5000);
+            if (!isCameraOpen)
+                return "Thermal camera window box can't open";
+            return "Thermal camera window box is displayed";
+        }
+
+        public string ChangeCameraMode(string mode)
+        {
+            switch (mode)
+            {
+                case "FUSION":
+
+                    if (ThermalCameraFUSION.Visible && ThermalCameraFUSION.Enabled)
+                    {
+                        ThermalCameraFUSION.Click();
+                        WaitForTransition();
+
+                        return "FUSION Mode active";
+                    }
+                    return "FUSION camera type not display / Press";
+
+                case "GREYSCALE":
+
+                    if (ThermalCameraGREYSCALE.Visible && ThermalCameraGREYSCALE.Enabled)
+                    {
+                        ThermalCameraGREYSCALE.Click();
+                        WaitForTransition();
+
+                        return "GREYSCALE Mode active";
+                    }
+                    return "GREYSCALE camera type not display / Press";
+
+
+                case "RAINBOW":
+                    if (ThermalCameraRAINBOW.Visible && ThermalCameraRAINBOW.Enabled)
+                    {
+                        ThermalCameraRAINBOW.Click();
+                        WaitForTransition();
+
+                        return "RAINBOW Mode active";
+                    }
+                    return "RAINBOW camera type not display / Press";
+
+            }
+            return "Can't select any mode";
+
+        }
+
+        public string ThermalCameraDisable()
+        {
+            ClickOnScreen((int)ThermalCameraSwitch.Location.X + 10, (int)(ThermalCameraSwitch.Location.Y + 50));
+
+            bool isCameraClosed = WaitUntil(ThermalCameraClose, 5000, "The camera window did not close properly");
+
+
+            return isCameraClosed ? "Thermal camera window is closed" : "Thermal camera window is still displayed";
+
+        }
+
+        public bool ThermalCameraClose()
+        {
             try
             {
-                ClickOnScreen((int)thermalCameraCalibrationWarningMsg.Location.X + 50, (int)thermalCameraCalibrationWarningMsg.Location.Y + 250); ////Confirm warning
-
-                ThermalCameraFUSION.Click();
-                Thread.Sleep(1000);
-                ThermalCameraRAINBOW.Click();
-                Thread.Sleep(1000);
-                ThermalCameraGREYSCALE.Click();
-                Thread.Sleep(1000);
-                ThermalCameraHOTSwitch.Click();
-                Console.WriteLine(ThermalCameraAVERAGE.Text);
-                Console.WriteLine(ThermalCameraPOINT.Text);
-                ClickOnScreen((int)thermalCameraExitBtn.Location.X, (int)thermalCameraExitBtn.Location.Y);         ////Close camera window
-
-
-                return "Thermal camera NOT CALIBRATED but working";
+                return !ThermalCameraFUSION.Visible;
             }
-            catch
+            catch (Exception ex)
             {
-                ThermalCameraFUSION.Click();
-                Thread.Sleep(1000);
-                ThermalCameraRAINBOW.Click();
-                Thread.Sleep(1000);
-                ThermalCameraGREYSCALE.Click();
-                Thread.Sleep(1000);
-                ThermalCameraHOTSwitch.Click();
-                Console.WriteLine(ThermalCameraAVERAGE.Text);
-                Console.WriteLine(ThermalCameraPOINT.Text);
-                ClickOnScreen((int)thermalCameraExitBtn.Location.X, (int)thermalCameraExitBtn.Location.Y);          ////Close camera window
-
-                return "Thermal camera CALIBRATED and working fine";
+                //The element is no longer in the UI tree.
+                return true;
             }
+
         }
     }
+
+
+
+
 }

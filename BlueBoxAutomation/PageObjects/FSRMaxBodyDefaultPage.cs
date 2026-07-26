@@ -150,27 +150,27 @@ namespace BlueBoxAutomation.PageObjects
                 case "Hands":
                     ClickOnScreen((int)HandsFSR.Location.X, (int)HandsFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
                 case "Decolletage":
                     ClickOnScreen((int)DecolletageFSR.Location.X, (int)DecolletageFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
                 case "Buttocks":
                     ClickOnScreen((int)ButtocksFSR.Location.X, (int)ButtocksFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
                 case "Abdomen":
                     ClickOnScreen((int)AbdomenFSR.Location.X, (int)AbdomenFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
                 case "Arms":
                     ClickOnScreen((int)ArmsFSR.Location.X, (int)ArmsFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
 
             }
@@ -182,7 +182,7 @@ namespace BlueBoxAutomation.PageObjects
 
         public string PWControledByUser_Minus()
         {
-            ClickOnPWMinus(8);
+            ClickOnPWMinus(8, "FSR");
 
             if (FSRPWMinimumValue.Text.Equals("10"))
                 return "PW min value 10";
@@ -202,7 +202,7 @@ namespace BlueBoxAutomation.PageObjects
         }
         public string PowerControledByUser_Minus()
         {
-            ClickOnPowerMinusIntensif(8);
+            ClickOnPowerMinusIntensif(8, "FSR");
 
             if (FSRPowerMinimumValue.Text.Equals("1"))
                 return "Power min value 1";

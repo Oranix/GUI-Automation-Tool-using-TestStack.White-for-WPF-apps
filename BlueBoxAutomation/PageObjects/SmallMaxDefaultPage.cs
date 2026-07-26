@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems;
 using System.Threading;
+using AutomationCore;
 
 namespace BlueBoxAutomation
 {
@@ -55,175 +56,184 @@ namespace BlueBoxAutomation
         public string[] DefaultsPower { get; set; }
         public string[] DefaultsIntervalTime { get; set; }
 
+        public int maxPassesValue = 15;
+        public int maxPowerValue = 60;
+        public int minPowerValue = 20;
+
         public void checkallinfo()
         {
             for (int i = 0; i < 40; i++)
-                Console.WriteLine(i + " " + window.Get<Label>(SearchCriteria.ByClassName("TextBlock").AndIndex(i)));          
+                Console.WriteLine(i + " " + window.Get<Label>(SearchCriteria.ByClassName("TextBlock").AndIndex(i)));
         }
 
         public void SmallMaxPage()
         {
             SmallMaxBtn.Click();
-            Thread.Sleep(2500);
+            WaitForTransition();
         }
 
         public string CheeksDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
+            Thread.Sleep(1000);
+
             ClickOnScreen((int)SmallCheeks.Location.X, (int)SmallCheeks.Location.Y);
-            Thread.Sleep(1500);
 
             var textPasses = CheeksDefaultPasses.Text;
             var textPower = CheeksDefaultPower.Text;
             var textIntervalTime = CheeksIntervalTime.Text;
+
             if (DefaultsPasses[0] == textPasses && DefaultsPower[0] == textPower && DefaultsIntervalTime[0] == textIntervalTime)
-            {
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+            return "Defaults are wrong!";
+
+
         }
 
         public string NeckDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
+            Thread.Sleep(1000);
+
             ClickOnScreen((int)SmallNeck.Location.X, (int)SmallNeck.Location.Y);
-            Thread.Sleep(1500);
 
             var textPasses = NeckDefaultPasses.Text;
             var textPower = NeckDefaultPower.Text;
             var textIntervalTime = NeckIntervalTime.Text;
+
             if (DefaultsPasses[1] == textPasses && DefaultsPower[1] == textPower && DefaultsIntervalTime[1] == textIntervalTime)
-            {
-                
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+            return "Defaults are wrong!";
+
         }
 
         public string SubmentalDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
+            Thread.Sleep(1000);
+
             ClickOnScreen((int)SmallSubmental.Location.X, (int)SmallSubmental.Location.Y);
-            Thread.Sleep(1500);
 
             var textPasses = SubmentalDefaultPasses.Text;
             var textPower = SubmentalDefaultPower.Text;
             var textIntervalTime = SubmentalIntervalTime.Text;
+
             if (DefaultsPasses[2] == textPasses && DefaultsPower[2] == textPower && DefaultsIntervalTime[2] == textIntervalTime)
-            {
-                
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+            return "Defaults are wrong!";
+
         }
 
         public string DecolletageDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
+            Thread.Sleep(1000);
+
             ClickOnScreen((int)SmallDecolletage.Location.X, (int)SmallDecolletage.Location.Y);
-            Thread.Sleep(1500);
 
             var textPasses = DecolltageDefaultPasses.Text;
             var textPower = DecolltageDefaultPower.Text;
             var textIntervalTime = DecolltageIntervalTime.Text;
+
             if (DefaultsPasses[3] == textPasses && DefaultsPower[3] == textPower && DefaultsIntervalTime[3] == textIntervalTime)
-            {
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+            return "Defaults are wrong!";
+
         }
 
         public bool LedOffCheck()
         {
             if (SmallLedOff.Text.Equals("START"))
-            {
                 return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            return false;
+
         }
 
         public string PassesControledByUser_Pluse(string area)
         {
-            switch (area) {
+            int pressingAmount = 0;
+
+            switch (area)
+            {
                 case "Cheeks":
-                ClickOnScreen((int)SmallCheeks.Location.X, (int)SmallCheeks.Location.Y);
-                Thread.Sleep(1000);
-                ClickOnPassesPluse(5);
+                    ClickOnScreen((int)SmallCheeks.Location.X, (int)SmallCheeks.Location.Y);
+
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[0]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
+
                 case "Neck":
                     ClickOnScreen((int)SmallNeck.Location.X, (int)SmallNeck.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPassesPluse(5);
+
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[1]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
+
                 case "Submental":
                     ClickOnScreen((int)SmallSubmental.Location.X, (int)SmallSubmental.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPassesPluse(5);
+
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[2]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
+
                 case "Decolletage":
                     ClickOnScreen((int)SmallDecolletage.Location.X, (int)SmallDecolletage.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPassesPluse(5);
+
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[3]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
 
             }
-            if (SmallPassesMaximumValue.Text.Equals("15"))
-                return "Passes max value 15";
-            else
-                return "Passes max value is not 15";
+
+            int actualMaxValue = Convert.ToInt32(SmallPassesMaximumValue.Text);
+            return actualMaxValue == 15 ? "Passes max value 15" : $"Passes max value is {actualMaxValue} instead of 15";
+
         }
 
         public string PassesControledByUser_Minus()
         {
-            ClickOnPassesMinus(15);
+            ClickOnPassesMinus(maxPassesValue);  //dec from maxPassesValue
 
-            if (SmallPassesMinimumValue.Text.Equals("0"))
-                return "Passes min value 0";
-            else
-                return "Passes min Value is not 0";
+            int actualMinValue = Convert.ToInt32(SmallPassesMinimumValue.Text);
+            return actualMinValue == 0 ? "Passes min value 0" : $"Passes min value is {actualMinValue} instead of 0";
+
         }
 
         public string PowerControledByUser_Pluse()
         {
-            ClickOnPowerPluse(25);
+            int pressingAmount = 0;
 
-            if (SmallPowerMaximumValue.Text.Equals("60"))
-                return "Power max Value 60";
-            else
-                return "Power max Value is not 60";
+            pressingAmount = maxPowerValue - Convert.ToInt32(DefaultsPower[1]); //[1] for selecting the minimum power value from the all areas
+
+            ClickOnPowerPluse(pressingAmount);
+
+            int actualMaxValue = Convert.ToInt32(SmallPowerMaximumValue.Text);
+            return actualMaxValue == 60 ? "Power max value 60" : $"Power max Value is  {actualMaxValue} instead of 60";
+          
         }
 
         public string PowerControledByUser_Minus()
         {
-            ClickOnPowerMinus(40);
+            int pressingAmount = maxPowerValue - minPowerValue;
+            ClickOnPowerMinus(pressingAmount);
 
-            if (SmallPowerMinimumValue.Text.Equals("20"))
-                return "Power min Value 20";
-            else
-                return "Power min Value is not 20";
+
+            int actualMinValue = Convert.ToInt32(SmallPowerMinimumValue.Text);
+            return actualMinValue == 20 ? "Power min value 20" : $"Power min value is {actualMinValue} instead of 20";
+          
         }
 
         public string CheckSmallEntered()
         {
-            try
-            {
-                return SmallLabel.Text;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            
+            bool isSmallSelected = WaitUntil(() => SmallLabel.Visible && SmallCheeks.Enabled, 10000, "Small treatment area is not open");
+
+            if (isSmallSelected)
+                return "Face SmallMax is enterd";
+
+            Logger.Error("Small area not displayed");
+            return "Small area not enterd";
         }
     }
 }

@@ -234,27 +234,27 @@ namespace BlueBoxAutomation
                 case "Decolletage":
                     ClickOnScreen((int)DecolletageIntensif.Location.X, (int)DecolletageIntensif.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(42);
+                    ClickOnPWPluseIntensif(42);
                     break;
                 case "Hands":
                     ClickOnScreen((int)HandsIntensif.Location.X, (int)HandsIntensif.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(42);
+                    ClickOnPWPluseIntensif(42);
                     break;
                 case "Buttocks":
                     ClickOnScreen((int)ButtocksIntensif.Location.X, (int)ButtocksIntensif.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(42);
+                    ClickOnPWPluseIntensif(42);
                     break;
                 case "Abdomen":
                     ClickOnScreen((int)AbdomenIntensif.Location.X, (int)AbdomenIntensif.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(42);
+                    ClickOnPWPluseIntensif(42);
                     break;
                 case "Arms":
                     ClickOnScreen((int)ArmsIntensif.Location.X, (int)ArmsIntensif.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(42);
+                    ClickOnPWPluseIntensif(42);
                     break;
 
             }
@@ -266,7 +266,7 @@ namespace BlueBoxAutomation
 
         public string PWControledByUser_Minus()
         {
-            ClickOnPWMinus(48);
+            ClickOnPWMinus(48,"Intensif");
 
             if (IntensifPWMinimumValue.Text.Equals("20"))
                 return "PW min value 20";
@@ -304,7 +304,7 @@ namespace BlueBoxAutomation
         }
         public string PowerControledByUser_Minus()
         {
-            ClickOnPowerMinusIntensif(38);
+            ClickOnPowerMinusIntensif(38, "Intensif");
 
             if (IntensifPowerMinimumValue.Text.Equals("0"))
                 return "Power min value 0";
@@ -354,39 +354,39 @@ namespace BlueBoxAutomation
                 case "Decolletage":
                     DecolletageIntensif.Click();
                     ClickOnPowerPluse(23);              //Get to 35W
-                    ClickOnPWPluse(14);                  //Get to thershold 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(14);                  //Get to thershold 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 case "Hands":
                     HandsIntensif.Click();
                     ClickOnPowerPluse(23);              //Get to 35W
-                    ClickOnPWPluse(14);                  //Get to thershold 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(14);                  //Get to thershold 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 case "Buttocks":
                     ButtocksIntensif.Click();
                     ClickOnPowerPluse(21);               //Get to 35W
                     //ClickOnPWMinus(5);                   //Get to 20W
-                    ClickOnPWPluse(11);                  //Get to thershold 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(11);                  //Get to thershold 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 case "Abdomen":
                     AbdomenIntensif.Click();
                     ClickOnPowerPluse(20);               //Get to 35W
                     //ClickOnPWMinus(5);                   //Get to 20W
-                    ClickOnPWPluse(11);                  //Get to thershold 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(11);                  //Get to thershold 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 case "Arms":
                     ArmsIntensif.Click();
                     ClickOnPowerPluse(23);               //Get to 35W
                     //ClickOnPWMinus(5);                   //Get to 20W
-                    ClickOnPWPluse(11);                  //Get to thershold 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(11);                  //Get to thershold 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 default: return 0;
@@ -708,14 +708,17 @@ namespace BlueBoxAutomation
             if (Area[0] == area)
             {
                 DecolletageIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;    //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;    //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;   //Save Depth 
+                //var textDepth = saveDepth.Text;   //Save Depth 
+                var textDepth = GetIntensifDepth();
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
 
@@ -723,56 +726,72 @@ namespace BlueBoxAutomation
             else if (Area[1] == area)
             {
                 HandsIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;    //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;    //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;   //Save Depth 
+                //var textDepth = saveDepth.Text;   //Save Depth 
+                var textDepth = GetIntensifDepth();
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
+
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
             }
             else if (Area[2] == area)
             {
                 ButtocksIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;    //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;    //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;   //Save Depth 
+                //var textDepth = saveDepth.Text;   //Save Depth 
+                var textDepth = GetIntensifDepth();
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
+
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
             }
             else if (Area[3] == area)
             {
                 AbdomenIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;    //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;    //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;   //Save Depth 
+                //var textDepth = saveDepth.Text;   //Save Depth 
+                var textDepth = GetIntensifDepth();
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
+
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
             }
             else if (Area[4] == area)
             {
                 ArmsIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;    //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;    //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;   //Save Depth 
+                //var textDepth = saveDepth.Text;   //Save Depth 
+                var textDepth = GetIntensifDepth();
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
+
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
             }

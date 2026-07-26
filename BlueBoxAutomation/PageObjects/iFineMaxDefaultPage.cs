@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutomationCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -17,8 +18,8 @@ namespace BlueBoxAutomation
     {
         public Button IfineMaxBtn => window.Get<Button>(SearchCriteria.ByText("iFineMax"));
         public Label IFineLabel => window.Get<Label>(SearchCriteria.ByText("Face iFineMax"));
-        public Label PeriorbitalIfine => window.Get<Label>(SearchCriteria.ByText("Periorbital"));   
-        public Label Perioralfine => window.Get<Label>(SearchCriteria.ByText("Perioral"));        
+        public Label PeriorbitalIfine => window.Get<Label>(SearchCriteria.ByText("Periorbital"));
+        public Label Perioralfine => window.Get<Label>(SearchCriteria.ByText("Perioral"));
         public Label LedOff => window.Get<Label>(SearchCriteria.ByText("START"));
         public Label iFinePassesMaximumValue => window.Get<Label>(SearchCriteria.ByText("15"));
         public Label iFinePassesMinimumValue => window.Get<Label>(SearchCriteria.ByText("0"));
@@ -43,6 +44,11 @@ namespace BlueBoxAutomation
         public string[] DefaultsPasses { get; set; }
         public string[] DefaultsPower { get; set; }
         public string[] DefaultsIntervalTime { get; set; }
+
+        public int maxPassesValue = 15;
+        public int maxPowerValue = 6;
+
+
 
         public void checkallinfo()
         {
@@ -74,118 +80,113 @@ namespace BlueBoxAutomation
         public void IFineMAX()
         {
             IfineMaxBtn.Click();
-            Thread.Sleep(2500);                   
+            WaitForTransition();
         }
 
         public string PeriorbitalDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
+            Thread.Sleep(1000);
+
             ClickOnScreen((int)PeriorbitalIfine.Location.X, (int)PeriorbitalIfine.Location.Y);
-            Thread.Sleep(1500);
 
             var textPasses = savePasses.Text;
             var textPower = savePower.Text;
             var textIntervalTime = saveIntervalTime.Text;
-            if (DefaultsPasses[0] == textPasses && DefaultsPower[0] == textPower && DefaultsIntervalTime[0] == textIntervalTime)
-            {
+
+            if (DefaultsPasses[0] == textPasses && DefaultsPower[0] == textPower && DefaultsIntervalTime[0] == textIntervalTime)            
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+            return "Defaults are wrong!";
+
         }
 
         public string PerioralDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
             ClickOnScreen((int)Perioralfine.Location.X, (int)Perioralfine.Location.Y);
-            Thread.Sleep(1500);
 
             var textPasses = savePasses.Text;
             var textPower = savePower.Text;
             var textIntervalTime = saveIntervalTime.Text;
-            if (DefaultsPasses[1] == textPasses && DefaultsPower[1] == textPower && DefaultsIntervalTime[1] == textIntervalTime)
-            {
+
+            if (DefaultsPasses[1] == textPasses && DefaultsPower[1] == textPower && DefaultsIntervalTime[1] == textIntervalTime)        
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+            return "Defaults are wrong!";
         }
 
         public bool LedOffCheck()
         {
             if (LedOff.Text.Equals("START"))
-            {
                 return true;
-            }
-            else
-            {
-                return false;
-            }
+            return false;
+
         }
 
         public string PassesControledByUser_Pluse(string area)
         {
+            int pressingAmount = 0;
+
             switch (area)
             {
                 case "Periorbital":
                     ClickOnScreen((int)PeriorbitalIfine.Location.X, (int)PeriorbitalIfine.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPassesPluse(5);
+              
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[0]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
+
                 case "Perioral":
                     ClickOnScreen((int)Perioralfine.Location.X, (int)Perioralfine.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPassesPluse(5);
+
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[0]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
             }
 
-            if (iFinePassesMaximumValue.Text.Equals("15"))
-                return "Passes max value 15";
-            else
-                return "Passes max value is not 15";
+            int actualMaxValue = Convert.ToInt32(iFinePassesMaximumValue.Text);
+            
+            return actualMaxValue == 15 ? "Passes max value 15" : $"Passes max value is {actualMaxValue} instead of 15";
         }
 
         public string PassesControledByUser_Minus()
         {
-            ClickOnPassesMinus(15);
+            ClickOnPassesMinus(maxPassesValue);  //dec from maxPassesValue
 
-            if (iFinePassesMinimumValue.Text.Equals("0"))
-                return "Passes min value 0";
-            else
-                return "Passes min value is not 0";
+            int actualMinValue = Convert.ToInt32(iFinePassesMinimumValue.Text);
+            return actualMinValue == 0 ? "Passes min value 0" : $"Passes min value is {actualMinValue} instead of 0";
+
         }
 
         public string PowerControledByUser_Pluse()
         {
-            ClickOnPowerPluse(3);
+            int pressingAmount = 0;
 
-            if (iFinePowerMaximumValue.Text.Equals("6"))
-                return "Power max Value 6";
-            else
-                return "Power max Value is not 6";
+            pressingAmount = maxPowerValue - Convert.ToInt32(DefaultsPower[0]);
+
+            ClickOnPowerPluse(pressingAmount);
+
+            int actualMaxValue = Convert.ToInt32(iFinePowerMaximumValue.Text);
+            return actualMaxValue == 6 ? "Power max Value 6" : $"Power max Value is  {actualMaxValue} instead of 6";
         }
         public string PowerControledByUser_Minus()
         {
-            ClickOnPowerMinus(5);
+            ClickOnPowerMinus(maxPowerValue);
 
-            if (iFinePowerMinimumValue.Text.Equals("1"))
-                return "Power min Value 1";
-            else
-                return "Power min Value is not 1";
+            int actualMinValue = Convert.ToInt32(iFinePowerMinimumValue.Text);
+
+            return actualMinValue == 1 ? "Power min Value 1" : $"Power min Value is {actualMinValue} instead of 1";
+
         }
 
         public string CheckiFineEntered()
         {
-            try
-            {
-                return IFineLabel.Text;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            bool isiFineSelected = WaitUntil(() => IFineLabel.Visible && PeriorbitalIfine.Enabled, 10000, "iFine treatment area is not open");
+
+            if (isiFineSelected)
+                return "Face iFineMax is enterd";
+
+            Logger.Error("iFine area not displayed");
+            return "iFine area not enterd";
         }
     }
 }

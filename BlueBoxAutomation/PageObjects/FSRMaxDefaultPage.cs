@@ -134,22 +134,22 @@ namespace BlueBoxAutomation.PageObjects
                 case "Forehead":
                     ClickOnScreen((int)ForeheadFSR.Location.X, (int)ForeheadFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
                 case "Periorbital":
                     ClickOnScreen((int)PeriorbitalFSR.Location.X, (int)PeriorbitalFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
                 case "Cheeks":
                     ClickOnScreen((int)CheeksFSR.Location.X, (int)CheeksFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
                 case "Neck":
                     ClickOnScreen((int)NeckFSR.Location.X, (int)NeckFSR.Location.Y);
                     Thread.Sleep(500);
-                    ClickOnPWPluse(5);
+                    ClickOnPWPluseIntensif(5);
                     break;
 
             }
@@ -161,7 +161,7 @@ namespace BlueBoxAutomation.PageObjects
 
         public string PWControledByUser_Minus()
         {
-            ClickOnPWMinus(8);
+            ClickOnPWMinus(8, "FSR");
 
             if (FSRPWMinimumValue.Text.Equals("10"))
                 return "PW min value 10";
@@ -181,7 +181,7 @@ namespace BlueBoxAutomation.PageObjects
         }
         public string PowerControledByUser_Minus()
         {
-            ClickOnPowerMinusIntensif(8);
+            ClickOnPowerMinusIntensif(8, "FSR");
 
             if (FSRPowerMinimumValue.Text.Equals("1"))
                 return "Power min value 1";
