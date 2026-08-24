@@ -4,6 +4,11 @@ An automated testing framework for desktop GUI applications, built in **C#** to 
 Designed for developers and QA engineers looking to improve testing accuracy and reduce manual effort.
 
 ---
+## 🖥️ Supported PRO MAX Software
+
+**Software Version:** 01.06.05
+
+This automation framework is developed and validated for PRO MAX Software Version **01.06.05**.
 
 ## 🚀 Features
 
