@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using static System.Net.Mime.MediaTypeNames;
 using System.Net.NetworkInformation;
+using TestStack.White.UIItems.WPFUIItems;
 
 namespace BlueBoxAutomation
 {
@@ -73,6 +74,12 @@ namespace BlueBoxAutomation
         public string[] DefaultsPW { get; set; }
         public string[] DefaultsDepth { get; set; }
 
+
+        public int PW_max_value = 200;
+        public int PW_min_value = 20;
+        public int Power_max_value = 35;
+        public int Power_min_value = 1;
+
         public void checkallinfo()
         {
             for (int i = 0; i < 40; i++)
@@ -109,7 +116,7 @@ namespace BlueBoxAutomation
         public void IntneisfMAXPage()
         {
             IntensifMaxBtn.Click();
-            Thread.Sleep(2500);
+            WaitForTransition();
         }
         public string CheckIntneisfFaceEntered()
         {
@@ -198,97 +205,197 @@ namespace BlueBoxAutomation
         public bool LedOffCheck()
         {
             if (LedOff.Text.Equals("START"))
-            {
                 return true;
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public string PWControledByUser_Pluse(string area)
         {
+            int PW_max_value = 500;
+
             switch (area)
             {
                 case "Forehead":
                     ClickOnScreen((int)ForeheadIntensif.Location.X, (int)ForeheadIntensif.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPWPluse(42);
+                    int Forehead_PWPressingAmount = (PW_max_value - Convert.ToInt32(ForeheadDefaultPW.Text)) / 10;
+                    //Thread.Sleep(1000);
+                    ClickOnPWPluseIntensif(Forehead_PWPressingAmount);
                     break;
+
                 case "Periorbital":
                     ClickOnScreen((int)PeriorbitalIntensif.Location.X, (int)PeriorbitalIntensif.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPWPluse(42);
+                    int Periorbital_PWPressingAmount = (PW_max_value - Convert.ToInt32(PeriorbitalDefaultPW.Text)) / 10;
+                    //Thread.Sleep(1000);
+                    ClickOnPWPluseIntensif(Periorbital_PWPressingAmount);
                     break;
+
                 case "Cheeks":
                     ClickOnScreen((int)CheeksIntensif.Location.X, (int)CheeksIntensif.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPWPluse(42);
+                    int Cheeks_PWPressingAmount = (PW_max_value - Convert.ToInt32(CheeksDefaultPW.Text)) / 10;
+                    //Thread.Sleep(1000);
+                    ClickOnPWPluseIntensif(Cheeks_PWPressingAmount);
                     break;
+
                 case "Neck":
                     ClickOnScreen((int)NeckIntensif.Location.X, (int)NeckIntensif.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPWPluse(42);
+                    int Neck_PWPressingAmount = (PW_max_value - Convert.ToInt32(NeckDefaultPW.Text)) / 10;
+                    //Thread.Sleep(1000);
+                    ClickOnPWPluseIntensif(Neck_PWPressingAmount);
                     break;
 
             }
-            if (IntensifPWMaximumValue.Text.Equals("500"))
-                return "PW max value 500";
-            else
-                return "PW max value is not 500";
+
+
+            int maxPWValue = Convert.ToInt32(IntensifPWMaximumValue.Text);
+            return maxPWValue == 500 ? "PW max value 500" : $"PW max value is {maxPWValue} instead of 500";
         }
 
         public string PWControledByUser_Minus()
         {
-            ClickOnPWMinus(48);
+            int decreasePW_range = (PW_max_value / 10) - (PW_min_value / 10) + 1;
 
-            if (IntensifPWMinimumValue.Text.Equals("20"))
-                return "PW min value 20";
-            else
-                return "PW min value is not 20";
+            ClickOnPWMinus(decreasePW_range, "Intensif");
+
+            int minPWValue = Convert.ToInt32(IntensifPWMinimumValue.Text);
+            return minPWValue == 20 ? "PW min value 20" : $"PW min value is {minPWValue} instead of 20";
         }
 
-        public string DepthControledByUser_Pluse()
+        public string DepthControledByUser_Pluse(string area)
         {
-            ClickOnDepthPluse(38);
+            switch (area)
+            {
+                case "Forehead":
 
-            if (IntensifDepthMaximumValue.Text.Equals("5"))
-                return "Depth max value 5";
-            else
-                return "Depth max value is not 5";
+                    double maxDepthValueAamountForForhead = Convert.ToDouble(ForeheadDepth.Text);
+
+                    maxDepthValueAamountForForhead = maxDepthValueAamountForForhead * 14;  //Pressing 21 times + 
+
+                    ClickOnDepthPluse(maxDepthValueAamountForForhead);
+
+                    double maxDepthValueForForhead = Convert.ToDouble(IntensifDepthMaximumValue.Text);
+
+                    return maxDepthValueForForhead == 3.5 ? "Depth max value 3.5" : $"Depth max value is {maxDepthValueForForhead} instead of 3.5";
+
+
+                case "Periorbital":
+
+                    double maxDepthValueAamountForPeriorbital = Convert.ToDouble(PeriorbitalDefaultDepth.Text);
+
+                    maxDepthValueAamountForPeriorbital = maxDepthValueAamountForPeriorbital * 14;  //Pressing 21 times + 
+
+                    ClickOnDepthPluse(maxDepthValueAamountForPeriorbital);
+
+                    double maxDepthValueForPeriorbital = Convert.ToDouble(IntensifDepthMaximumValue.Text);
+
+                    return maxDepthValueForPeriorbital == 3.5 ? "Depth max value 3.5" : $"Depth max value is {maxDepthValueForPeriorbital} instead of 3.5";
+
+
+                case "Cheeks":
+
+                    double maxDepthValueAamountForCheeks = Convert.ToDouble(CheeksDefaultDepth.Text);
+
+                    maxDepthValueAamountForCheeks = maxDepthValueAamountForCheeks * 4; //Pressing 10 times + 
+
+                    ClickOnDepthPluse(maxDepthValueAamountForCheeks);
+
+                    double maxDepthValueForCheeks = Convert.ToDouble(IntensifDepthMaximumValue.Text);
+
+                    return maxDepthValueForCheeks == 3.5 ? "Depth max value 3.5" : $"Depth max value is {maxDepthValueForCheeks} instead of 3.5";
+
+
+                case "Neck":
+
+                    double maxDepthValueAamountForNeck = Convert.ToDouble(NeckDefaultDepth.Text);
+
+                    maxDepthValueAamountForNeck = maxDepthValueAamountForNeck * 10;
+
+                    ClickOnDepthPluse(maxDepthValueAamountForNeck);
+
+                    double maxDepthValueForNeck = Convert.ToDouble(IntensifDepthMaximumValue.Text);
+
+                    return maxDepthValueForNeck == 3.5 ? "Depth max value 3.5" : $"Depth max value is {maxDepthValueForNeck} instead of 3.5";
+
+            }
+
+            return "No area selected";
 
         }
 
         public string DepthControledByUser_Minus()
         {
-            ClickOnDepthMinus(45);
+            double maxDepthValueAamount = ((Convert.ToDouble(IntensifDepthMaximumValue.Text)) * 10) - 5;
 
-            if (IntensifDepthMinimumValue.Text.Equals("0.5"))
-                return "Depth min value 0.5";
-            else
-                return "Depth min value is not 1";
+            ClickOnDepthMinus(maxDepthValueAamount);
+
+            double minDepthValue = Convert.ToDouble(IntensifDepthMinimumValue.Text);
+
+            return minDepthValue == 0.5 ? "Depth min value 0.5" : $"Depth min value is {minDepthValue} not 0.5";
         }
 
-        public string PowerControledByUser_Pluse()
+        public string PowerControledByUser_Pluse(string area)
         {
-            ClickOnPowerPluse(25);
+            switch (area)
+            {
+                case "Forehead":
 
-            if (IntensifPowerMaximumValue.Text.Equals("35"))
-                return "Power max value 35";
-            else
-                return "Power max value is not 35";
-            ;
+                    double maxPowerValueAamountForForhead = Convert.ToDouble(ForeheadDefaultPower.Text) * 2.5;  //Connvert area power 10
+
+                    ClickOnPowerPluse(maxPowerValueAamountForForhead);
+
+                    double maxPowerValueForForehead = Convert.ToDouble(IntensifPowerMaximumValue.Text);
+
+                    return maxPowerValueForForehead == 25 ? "Power max value 25" : $"Power max value is {maxPowerValueForForehead} not 25";
+
+
+                case "Periorbital":
+
+                    double maxPowerValueAamountForPeriorbital = Convert.ToDouble(PeriorbitalDefaultPower.Text) * 2.5;  //Connvert area power 10
+
+                    ClickOnPowerPluse(maxPowerValueAamountForPeriorbital);
+
+                    double maxPowerValueForPeriorbital = Convert.ToDouble(IntensifPowerMaximumValue.Text);
+
+                    return maxPowerValueForPeriorbital == 25 ? "Power max value 25" : $"Power max value is {maxPowerValueForPeriorbital} not 25";
+
+
+                case "Cheeks":
+
+                    double maxPowerValueAamountForCheeks = Convert.ToDouble(CheeksDefaultPower.Text) * 1.8;  //Connvert area power 14
+
+                    ClickOnPowerPluse(maxPowerValueAamountForCheeks);
+
+                    double maxPowerValueForCheeks = Convert.ToDouble(IntensifPowerMaximumValue.Text);
+
+                    return maxPowerValueForCheeks == 25 ? "Power max value 25" : $"Power max value is {maxPowerValueForCheeks} not 25";
+
+
+                case "Neck":
+
+                    double maxPowerAamountForNeck = Convert.ToDouble(NeckDefaultPower.Text) * 1.8;  //Connvert area power 14
+
+                    ClickOnPowerPluse(maxPowerAamountForNeck);
+
+                    double maxPowerValueForNeck = Convert.ToDouble(IntensifPowerMaximumValue.Text);
+
+                    return maxPowerValueForNeck == 25 ? "Power max value 25" : $"Power max value is {maxPowerValueForNeck} not 25";
+
+
+            }
+
+            return "No area selected";
         }
+
         public string PowerControledByUser_Minus()
         {
-            ClickOnPowerMinusIntensif(38);
+            double maxPowerValueAamount = Convert.ToDouble(IntensifPowerMaximumValue.Text) + 1;
 
-            if (IntensifPowerMinimumValue.Text.Equals("0"))
-                return "Power min value 0";
-            else
-                return "Power min value is not 0";
+            ClickOnPowerMinusIntensif(maxPowerValueAamount, "Intensif");
+
+            double minPwerValue = Convert.ToDouble(IntensifPowerMinimumValue.Text);
+
+            return minPwerValue == 0 ? "Power min value 0" : $"Power min value is {minPwerValue} not 0";
         }
+
         public int CalculatePower(int pulseWidth)
         {
             if (pulseWidth <= 220)
@@ -331,30 +438,30 @@ namespace BlueBoxAutomation
                 case "Forehead":
                     ForeheadIntensif.Click();
                     ClickOnPowerPluse(25);              //Get to 35W
-                    ClickOnPWPluse(14);                  //Get to thershold 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(14);                  //Get to thershold 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 case "Periorbital":
                     PeriorbitalIntensif.Click();
                     ClickOnPowerPluse(25);              //Get to 35W
-                    ClickOnPWPluse(14);                  //Get to thershold 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(14);                  //Get to thershold 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 case "Cheeks":
                     CheeksIntensif.Click();
                     ClickOnPowerPluse(21);               //Get to 35W
                     //ClickOnPWMinus(5);                   //Get to 20W
-                    ClickOnPWPluse(11);                  //Get to thershold 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(11);                  //Get to thershold 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 case "Neck":
                     NeckIntensif.Click();
                     ClickOnPowerPluse(23);              //Get to 35W
-                    ClickOnPWPluse(14);                  //Get to 220PW
-                    ClickOnPWPluse(PWincreaseNumber);
+                    ClickOnPWPluseIntensif(14);                  //Get to 220PW
+                    ClickOnPWPluseIntensif(PWincreaseNumber);
                     expectedPower = CalculatePower(desiredPW);
                     return expectedPower;
                 default: return 0;
@@ -677,14 +784,17 @@ namespace BlueBoxAutomation
             if (Area[0] == area)
             {
                 ForeheadIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;  //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;  //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;  //Save Depth 
+                //var textDepth = saveDepth.Text;  //Save Depth 
+                var textDepth = GetIntensifDepth();
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
 
@@ -692,42 +802,52 @@ namespace BlueBoxAutomation
             else if (Area[1] == area)
             {
                 PeriorbitalIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;  //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;  //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;  //Save Depth 
+                //var textDepth = saveDepth.Text;  //Save Depth 
+                var textDepth = GetIntensifDepth();
+
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
             }
             else if (Area[2] == area)
             {
                 CheeksIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;  //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;  //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;  //Save Depth 
+                //var textDepth = saveDepth.Text;  //Save Depth 
+                var textDepth = GetIntensifDepth();
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
             }
             else if (Area[3] == area)
             {
                 NeckIntensif.Click();
-                ClickOnPWPluse(Convert.ToInt32(PW));
-                var textPW = savePW.Text;  //Save PW 
+                ClickOnPWPluseIntensif(Convert.ToInt32(PW));
+                //var textPW = savePW.Text;  //Save PW 
+                var textPW = GetIntensifPW();
 
                 ClickOnDepthPluse(Convert.ToInt32(depth));
-                var textDepth = saveDepth.Text;  //Save Depth 
+                //var textDepth = saveDepth.Text;  //Save Depth 
+                var textDepth = GetIntensifDepth(); 
 
                 ClickOnPowerPluse(Convert.ToInt32(power));
-                var textPower = savePower.Text;  //Save Power
+                //var textPower = savePower.Text;  //Save Power
+                var textPower = GetIntensifPower();
 
                 return (Convert.ToDouble(textPW), Convert.ToDouble(textDepth), Convert.ToDouble(textPower));
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutomationCore;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -73,21 +74,20 @@ namespace BlueBoxAutomation.PageObjects
         public void IFineMAX()
         {
             IfineMaxBtn.Click();
-            Thread.Sleep(2500);
+            WaitForTransition();
         }
 
         public string PeriorbitalDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
             ClickOnScreen((int)PeriorbitalIfine.Location.X, (int)PeriorbitalIfine.Location.Y);
-            Thread.Sleep(500);
-            PressingStart();   //Start button
+            PressStartAndWaitReady();   //Start button
 
             var textPasses = PeriorbitalIfinePasses.Text;
             var textPower = PeriorbitalIfinePower.Text;
-            var textIntervalTime = saveIntervalTime.Text;
+            var textIntervalTime = /*saveIntervalTime.Text*/ GetCurrentIntervalTimeValue();
             if (DefaultsPasses[0] == textPasses && DefaultsPower[0] == textPower && DefaultsIntervalTime[0] == textIntervalTime)
             {
-                PressingStop();  //Stop button
+                PressStopAndWaitStandby();  //Stop button
                 return "Defaults are OK!";
             }
             else
@@ -98,15 +98,14 @@ namespace BlueBoxAutomation.PageObjects
         public string PerioralDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
             ClickOnScreen((int)Perioralfine.Location.X, (int)Perioralfine.Location.Y);
-            Thread.Sleep(500);
-            PressingStart();   //Start button
+            PressStartAndWaitReady();   //Start button
 
             var textPasses = PerioralIfinePasses.Text;
             var textPower = PerioralIfinePower.Text;
-            var textIntervalTime = saveIntervalTime.Text;
+            var textIntervalTime = /*saveIntervalTime.Text*/ GetCurrentIntervalTimeValue();
             if (DefaultsPasses[1] == textPasses && DefaultsPower[1] == textPower && DefaultsIntervalTime[1] == textIntervalTime)
             {
-                PressingStop();  //Stop button
+                PressStopAndWaitStandby();  //Stop button
                 return "Defaults are OK!";
             }
             else
@@ -118,10 +117,19 @@ namespace BlueBoxAutomation.PageObjects
         public bool LedONCheck()
         {
             Thread.Sleep(500);
-            PressingStart();   //Start button
+            PressStartAndWaitReady();   //Start button
             if (LedON.Text.Equals("STOP"))
             {
-                return true;
+                var LED = ConnectDeviceWindow.ShowDialogWindow("IS THE HP LED ON ?");
+                if (LED == true)
+                {
+                    PressStopAndWaitStandby();  //Stop button
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -133,38 +141,38 @@ namespace BlueBoxAutomation.PageObjects
         {
             int successfulPowerLevels = 0;
             //CSVOpenCheck();   //Open CSV file for measuring the outputpower from the Scope
+
+            var RF = ConnectDeviceWindow.ShowDialogWindow("Testit RF Power in 1 - 6  Watt Press OK to continue the test");
             ClickOnScreen((int)PeriorbitalIfine.Location.X, (int)PeriorbitalIfine.Location.Y);
-            Thread.Sleep(500);
-            ClickOnPowerMinus(2); // Start from power  1W
-            Thread.Sleep(1000);
+
+            ClickOnPowerMinus(2); // Start from power power 1W
 
             for (int expectedPower = 1; expectedPower <= 6; expectedPower++)
             {
                 if (GetCurrentPowerValue() == expectedPower.ToString())
                 {
-                    PressingStart();  // Start button
                     Thread.Sleep(500);
+                    PressStartAndWaitReady();  // Start button
+                    //Thread.Sleep(5000);  //wait after state machine stablizing 
 
                     while (true)
                     {
-                        var currentValue = GetCurrentIntervalTimeValue();
+                        var currentValue = GetCurrentIntervalTimeValue();  //method returns a string
 
                         if (currentValue == "0")
                         {
-                            Console.WriteLine("iFine Get to if with: " + currentValue + " num");
+                            Logger.Error("iFine Get to if with current value " + currentValue);
                             successfulPowerLevels++;
                             break;
-                            //}
+                            
                         }
-                        else /*(AutomationException ex)*/
+                        else 
                         {
-                            //Console.WriteLine("Caught: " + ex.GetType().Name); //Get exception name
-                            Console.WriteLine("else: " + currentValue + " num");
+                            Logger.Error("else " + currentValue + "num ");
                         }
                     }
 
-                    PressingStop();  // Stop button
-                    Thread.Sleep(1000);
+                    PressStopAndWaitStandby();  // Stop button
                     ClickOnPowerPluse(1); // Move to the next power level
                 }
             }
@@ -215,14 +223,13 @@ namespace BlueBoxAutomation.PageObjects
 
         public string CheckiFineEntered()
         {
-            try
-            {
-                return IFineLabel.Text;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            bool isiFineSelected = WaitUntil(() => IFineLabel.Visible && PeriorbitalIfine.Enabled, 10000, "iFine treatment area is not open");
+
+            if (isiFineSelected)
+                return "iFineMax in ready mode is enterd";
+
+            Logger.Error("iFineMax in ready mode not open");
+            return "iFineMax in ready mode not open";
         }
 
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems;
 using System.Threading;
+using AutomationCore;
 
 namespace BlueBoxAutomation
 {
@@ -38,6 +39,8 @@ namespace BlueBoxAutomation
         public Label MiniShaperPassesMinimumValue => window.Get<Label>(SearchCriteria.ByText("0"));
         public Label MiniShaperPowerMaximumValue => window.Get<Label>(SearchCriteria.ByText("70"));
         public Label MiniShaperPowerMinimumValue => window.Get<Label>(SearchCriteria.ByText("20"));
+        public Label NoExecuteIntervalTime => window.Get<Label>(SearchCriteria.ByText("30"));
+
 
         public Label savePasses => window.Get<Label>(SearchCriteria.ByClassName("TextBlock").AndIndex(0));  //Save Passes
 
@@ -50,17 +53,21 @@ namespace BlueBoxAutomation
         public string[] DefaultsPower { get; set; }
         public string[] DefaultsIntervalTime { get; set; }
 
+        public int maxPassesValue = 15;
+        public int maxPowerValue = 70;
+        public int minPowerValue = 20;
+
         public void checkallinfo()
         {
             for (int i = 0; i < 40; i++)
                 Console.WriteLine(i + " " + window.Get<Label>(SearchCriteria.ByClassName("TextBlock").AndIndex(i)));
-      
+
         }
 
         public void MiniShaperBodyMaxPage()
         {
             MiniShaperBtn.Click();
-            Thread.Sleep(2500);
+            WaitForTransition();
         }
 
         public string DecolletageDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
@@ -72,125 +79,130 @@ namespace BlueBoxAutomation
             var textPower = DecolletageDefaultPower.Text;
             var textIntervalTime = DecolletageIntervalTime.Text;
             if (DefaultsPasses[0] == textPasses && DefaultsPower[0] == textPower && DefaultsIntervalTime[0] == textIntervalTime)
-            {
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+
+            return "Defaults are wrong!";
+
         }
         public string ArmsDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
             ClickOnScreen((int)ArmsMiniShaper.Location.X, (int)ArmsMiniShaper.Location.Y);
-            Thread.Sleep(1500);
+            Thread.Sleep(1000);
 
             var textPasses = ArmsDefaultPasses.Text;
             var textPower = ArmsDefaultPower.Text;
             var textIntervalTime = ArmsIntervalTime.Text;
             if (DefaultsPasses[1] == textPasses && DefaultsPower[1] == textPower && DefaultsIntervalTime[1] == textIntervalTime)
-            {
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+
+            return "Defaults are wrong!";
+
         }
         public string KneesDefaultPassesPowerTime(/*string passes, string power, string intervalTime*/)
         {
             ClickOnScreen((int)KneesMiniShaper.Location.X, (int)KneesMiniShaper.Location.Y);
-            Thread.Sleep(1500);
+            Thread.Sleep(1000);
 
             var textPasses = KneesDefaultPasses.Text;
             var textPower = KneesDefaultPower.Text;
             var textIntervalTime = KneesIntervalTime.Text;
             if (DefaultsPasses[2] == textPasses && DefaultsPower[2] == textPower && DefaultsIntervalTime[2] == textIntervalTime)
-            {
                 return "Defaults are OK!";
-            }
-            else
-            {
-                return "Defaults are wrong!";
-            }
+
+            return "Defaults are wrong!";
+
         }
 
         public bool LedOffCheck()
         {
-            if (MiniShaperLedOff.Text.Equals("START"))
+            string standbyModeMiniShaper = MiniShaperLedOff.Text;
+            string intervalTime = NoExecuteIntervalTime.Text;
+
+            if (standbyModeMiniShaper == "START" && intervalTime == "30")
             {
+                Logger.Error("MiniShaper Body Standby Mode, LED indication - OFF");
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
+
         }
 
         public string PassesControledByUser_Pluse(string area)
         {
+            int pressingAmount = 0;
+
             switch (area)
             {
                 case "Decolletage":
                     ClickOnScreen((int)DecolletageMiniShaper.Location.X, (int)DecolletageMiniShaper.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPassesPluse(5);
+
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[0]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
+
                 case "Arms":
                     ClickOnScreen((int)ArmsMiniShaper.Location.X, (int)ArmsMiniShaper.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPassesPluse(2);
+
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[1]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
+
                 case "Knees":
                     ClickOnScreen((int)KneesMiniShaper.Location.X, (int)KneesMiniShaper.Location.Y);
-                    Thread.Sleep(1000);
-                    ClickOnPassesPluse(2);
+
+                    pressingAmount = maxPassesValue - Convert.ToInt32(DefaultsPasses[2]);
+                    ClickOnPassesPluse(pressingAmount);
+
                     break;
             }
-            if (MiniShaperPassesMaximumValue.Text.Equals("15"))
-                return "Passes max value 15";
-            else
-                return "Passes max value is not 15";
+
+            int actualMaxValue = Convert.ToInt32(MiniShaperPassesMaximumValue.Text);
+            return actualMaxValue == 15 ? "Passes max value 15" : $"Passes max value is {actualMaxValue} instead of 15";
         }
 
         public string PassesControledByUser_Minus()
-        {         
-            ClickOnPassesMinus(15);
+        {
 
-            if (MiniShaperPassesMinimumValue.Text.Equals("0"))
-                return "Passes min value 0";
-            else
-                return "Passes min Value is not 0";
+            ClickOnPassesMinus(maxPassesValue);  //dec from maxPassesValue
+
+            int actualMinValue = Convert.ToInt32(MiniShaperPassesMinimumValue.Text);
+            return actualMinValue == 0 ? "Passes min value 0" : $"Passes min value is {actualMinValue} instead of 0";
         }
 
         public string PowerControledByUser_Pluse()
         {
-            ClickOnPowerPluse(40);
+            int pressingAmount = 0;
 
-            if (MiniShaperPowerMaximumValue.Text.Equals("70"))
-                return "Power max Value 70";
-            else
-                return "Power max Value is not 70";
+            pressingAmount = maxPowerValue - Convert.ToInt32(DefaultsPower[1]); //[1] for selecting the minimum default power value from the all areas
+
+            ClickOnPowerPluse(pressingAmount);
+
+            int actualMaxValue = Convert.ToInt32(MiniShaperPowerMaximumValue.Text);
+            return actualMaxValue == 70 ? "Power max value 70" : $"Power max Value is  {actualMaxValue} instead of 70";
         }
+
         public string PowerControledByUser_Minus()
         {
-            ClickOnPowerMinus(50);
+            int pressingAmount = maxPowerValue - minPowerValue;
+            ClickOnPowerMinus(pressingAmount);
 
-            if (MiniShaperPowerMinimumValue.Text.Equals("20"))
-                return "Power min Value 20";
-            else
-                return "Power min Value is not 20";
+            ClickOnPowerMinus(maxPowerValue);
+
+            int actualMaxValue = Convert.ToInt32(MiniShaperPowerMinimumValue.Text);
+            return actualMaxValue == 20 ? "Power max value 20" : $"Power max Value is  {actualMaxValue} instead of 20";
         }
         public string CheckMiniShaperBodyEntered()
         {
-            try
-            {
-                return MiniShaperBodyLabel.Text;
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            bool isMiniShaperSelected = WaitUntil(() => MiniShaperBodyLabel.Visible && DecolletageMiniShaper.Enabled, 10000, "MiniShaper body treatment area is not open");
+
+            if (isMiniShaperSelected)
+                return "Body MiniShaperMax page is enterd properly";
+
+            Logger.Error("MiniShaper area not displayed");
+            return "MiniShaper area not enterd";
         }
 
 

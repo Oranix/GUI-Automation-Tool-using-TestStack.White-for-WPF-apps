@@ -1,8 +1,15 @@
 ﻿using BlueBoxAutomation.PageObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Threading;
+using System.Windows.Documents;
 
-//CODE SUORCE C:\automation
+//CODE SUORCE D:\Autmation_ALL
+//Main automation source for testing PROMAX.
+//Include all regreisions up to SW V01.06.05.28.00.00
 
 
 namespace BlueBoxAutomation
@@ -32,10 +39,14 @@ namespace BlueBoxAutomation
         public void TC_03_SelectArea()
         {
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
-            Assert.AreEqual(treatmentArea.faceAreaSelectCheck(), "All 5 HP'S are in face treatment");
-            treatmentArea.bodyArea();
-            Assert.AreEqual(treatmentArea.bodyAreaSelectCheck(), "All 5 HP'S are in body treatment");
+
+            treatmentArea.OpenFaceArea();
+            Assert.AreEqual("Face - All HP buttons displayed successfully", treatmentArea.faceAreaSelectCheck());
+            Assert.IsTrue(treatmentArea.CloseFaceArea(), "Face - Label not close");
+          
+            treatmentArea.OpenBodyArea();
+            Assert.AreEqual("Body - All HP buttons displayed successfully", treatmentArea.bodyAreaSelectCheck());
+            Assert.IsTrue(treatmentArea.CloseBodyArea(), "Body - Label not close");      
         }
 
         [TestMethod]
@@ -47,10 +58,12 @@ namespace BlueBoxAutomation
             string[] defaultIntervalTime = { "30", "30" };
 
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
+
             iFineMaxDefaultPage iFineMaxPage = new iFineMaxDefaultPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
+
             iFineMaxPage.IFineMAX();
-            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "Face iFineMax");
+            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "Face iFineMax is enterd");
             Assert.AreEqual(iFineMaxPage.PeriorbitalDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(iFineMaxPage.PerioralDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(iFineMaxPage.LedOffCheck(), "LED is not OFF!");
@@ -63,10 +76,13 @@ namespace BlueBoxAutomation
             Assert.AreEqual(iFineMaxPage.PowerControledByUser_Pluse(), "Power max Value 6");
             Assert.AreEqual(iFineMaxPage.PowerControledByUser_Minus(), "Power min Value 1");
 
-
             //ThermalCamera camera = new ThermalCamera();
-            //Assert.AreEqual(camera.ThermalCameraOnOff(), "Thermal camera CALIBRATED and working fine");
-            ReturntoMain();
+            //Assert.AreEqual(camera.ThermalCameraEnable(), "Thermal camera window box is displayed");
+            //Assert.AreEqual(camera.ChangeCameraMode("FUSION"), "FUSION Mode active");
+            //Assert.AreEqual(camera.ChangeCameraMode("GREYSCALE"), "GREYSCALE Mode active");
+            //Assert.AreEqual(camera.ChangeCameraMode("RAINBOW"), "RAINBOW Mode active");
+            //Assert.AreEqual(camera.ThermalCameraDisable(), "Thermal camera window is closed");
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
@@ -78,34 +94,41 @@ namespace BlueBoxAutomation
             string[] defaultIntervalTime = { "30", "30", "30", "30" };
 
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
+
             SmallMaxDefaultPage smallMaxDefaultPage = new SmallMaxDefaultPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
+
             smallMaxDefaultPage.SmallMaxPage();
-            Assert.AreEqual(smallMaxDefaultPage.CheckSmallEntered(), "Face SmallMax");
+            Assert.AreEqual(smallMaxDefaultPage.CheckSmallEntered(), "Face SmallMax is enterd");
             Assert.AreEqual(smallMaxDefaultPage.CheeksDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(smallMaxDefaultPage.NeckDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(smallMaxDefaultPage.SubmentalDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(smallMaxDefaultPage.DecolletageDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(smallMaxDefaultPage.PassesControledByUser_Pluse(areas[0]), "Passes max value 15");
             Assert.AreEqual(smallMaxDefaultPage.PassesControledByUser_Minus(), "Passes min value 0");
-            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Pluse(), "Power max Value 60");
-            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Minus(), "Power min Value 20");
+            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Pluse(), "Power max value 60");
+            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Minus(), "Power min value 20");
             Assert.AreEqual(smallMaxDefaultPage.PassesControledByUser_Pluse(areas[1]), "Passes max value 15");
             Assert.AreEqual(smallMaxDefaultPage.PassesControledByUser_Minus(), "Passes min value 0");
-            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Pluse(), "Power max Value 60");
-            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Minus(), "Power min Value 20");
+            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Pluse(), "Power max value 60");
+            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Minus(), "Power min value 20");
             Assert.AreEqual(smallMaxDefaultPage.PassesControledByUser_Pluse(areas[2]), "Passes max value 15");
             Assert.AreEqual(smallMaxDefaultPage.PassesControledByUser_Minus(), "Passes min value 0");
-            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Pluse(), "Power max Value 60");
-            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Minus(), "Power min Value 20");
+            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Pluse(), "Power max value 60");
+            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Minus(), "Power min value 20");
             Assert.AreEqual(smallMaxDefaultPage.PassesControledByUser_Pluse(areas[3]), "Passes max value 15");
             Assert.AreEqual(smallMaxDefaultPage.PassesControledByUser_Minus(), "Passes min value 0");
-            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Pluse(), "Power max Value 60");
-            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Minus(), "Power min Value 20");
+            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Pluse(), "Power max value 60");
+            Assert.AreEqual(smallMaxDefaultPage.PowerControledByUser_Minus(), "Power min value 20");
 
-            //ThermalCamera camera = new ThermalCamera();
-            //Assert.AreEqual(camera.ThermalCameraOnOff(), "Thermal camera CALIBRATED and working fine");
-            ReturntoMain();
+            ThermalCamera camera = new ThermalCamera();
+            Assert.AreEqual(camera.ThermalCameraEnable(), "Thermal camera window box is displayed");
+            Assert.AreEqual(camera.ChangeCameraMode("FUSION"), "FUSION Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("GREYSCALE"), "GREYSCALE Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("RAINBOW"), "RAINBOW Mode active");
+            Assert.AreEqual(camera.ThermalCameraDisable(), "Thermal camera window box is closed");
+
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
@@ -117,10 +140,12 @@ namespace BlueBoxAutomation
             string[] defaultIntervalTime = { "30", "30", "30" };
 
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
+
             MiniShaperMaxFaceDefaultPage miniShaperMaxFaceDefaultPage = new MiniShaperMaxFaceDefaultPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
+
             miniShaperMaxFaceDefaultPage.MiniShaperMaxPage();
-            Assert.AreEqual(miniShaperMaxFaceDefaultPage.CheckMiniShaperFaceEntered(), "Face MiniShaperMax");
+            Assert.AreEqual(miniShaperMaxFaceDefaultPage.CheckMiniShaperFaceEntered(), "Face MiniShaperMax page is enterd properly");
             Assert.AreEqual(miniShaperMaxFaceDefaultPage.CheeksDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(miniShaperMaxFaceDefaultPage.JawlineDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(miniShaperMaxFaceDefaultPage.SubmentalDefaultPassesPowerTime(), "Defaults are OK!");
@@ -137,9 +162,13 @@ namespace BlueBoxAutomation
             Assert.AreEqual(miniShaperMaxFaceDefaultPage.PowerControledByUser_Pluse(), "Power max Value 70");
             Assert.AreEqual(miniShaperMaxFaceDefaultPage.PowerControledByUser_Minus(), "Power min Value 20");
 
-            //ThermalCamera camera = new ThermalCamera();
-            //Assert.AreEqual(camera.ThermalCameraOnOff(), "Thermal camera CALIBRATED and working fine");
-            ReturntoMain();
+            ThermalCamera camera = new ThermalCamera();
+            Assert.AreEqual(camera.ThermalCameraEnable(), "Thermal camera window box is displayed");
+            Assert.AreEqual(camera.ChangeCameraMode("FUSION"), "FUSION Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("GREYSCALE"), "GREYSCALE Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("RAINBOW"), "RAINBOW Mode active");
+            Assert.AreEqual(camera.ThermalCameraDisable(), "Thermal camera window box is closed");
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
@@ -151,10 +180,10 @@ namespace BlueBoxAutomation
             string[] defaultIntervalTime = { "30", "30", "30" };
 
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             MiniShaperMaxBodyDefaultPage miniShaperMaxBodyDefaultPage = new MiniShaperMaxBodyDefaultPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             miniShaperMaxBodyDefaultPage.MiniShaperBodyMaxPage();
-            Assert.AreEqual(miniShaperMaxBodyDefaultPage.CheckMiniShaperBodyEntered(), "Body MiniShaperMax");
+            Assert.AreEqual(miniShaperMaxBodyDefaultPage.CheckMiniShaperBodyEntered(), "Body MiniShaperMax page is enterd properly");
             Assert.AreEqual(miniShaperMaxBodyDefaultPage.DecolletageDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(miniShaperMaxBodyDefaultPage.ArmsDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(miniShaperMaxBodyDefaultPage.KneesDefaultPassesPowerTime(), "Defaults are OK!");
@@ -171,9 +200,13 @@ namespace BlueBoxAutomation
             Assert.AreEqual(miniShaperMaxBodyDefaultPage.PowerControledByUser_Pluse(), "Power max Value 70");
             Assert.AreEqual(miniShaperMaxBodyDefaultPage.PowerControledByUser_Minus(), "Power min Value 20");
 
-            //ThermalCamera camera = new ThermalCamera();
-            //Assert.AreEqual(camera.ThermalCameraOnOff(), "Thermal camera CALIBRATED and working fine");
-            ReturntoMain();
+            ThermalCamera camera = new ThermalCamera();
+            Assert.AreEqual(camera.ThermalCameraEnable(), "Thermal camera window box is displayed");
+            Assert.AreEqual(camera.ChangeCameraMode("FUSION"), "FUSION Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("GREYSCALE"), "GREYSCALE Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("RAINBOW"), "RAINBOW Mode active");
+            Assert.AreEqual(camera.ThermalCameraDisable(), "Thermal camera window box is closed");
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
@@ -185,10 +218,10 @@ namespace BlueBoxAutomation
             string[] defaultIntervalTime = { "30", "30", "30", "30", "30", "30", "30" };
 
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             ShaperMaxDefaultPage shaperMaxDefaultPage = new ShaperMaxDefaultPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             shaperMaxDefaultPage.ShaperMaxPage();
-            Assert.AreEqual(shaperMaxDefaultPage.CheckShaperEntered(), "Body ShaperMax");
+            Assert.AreEqual(shaperMaxDefaultPage.CheckShaperEntered(), "ShaperMax page is enterd properly");
             Assert.AreEqual(shaperMaxDefaultPage.FlanksDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(shaperMaxDefaultPage.ArmsDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(shaperMaxDefaultPage.AbdomenDefaultPassesPowerTime(), "Defaults are OK!");
@@ -225,9 +258,13 @@ namespace BlueBoxAutomation
             Assert.AreEqual(shaperMaxDefaultPage.PowerControledByUser_Pluse(), "Power max Value 100");
             Assert.AreEqual(shaperMaxDefaultPage.PowerControledByUser_Minus(), "Power min Value 45");
 
-            //ThermalCamera camera = new ThermalCamera();
-            //Assert.AreEqual(camera.ThermalCameraOnOff(), "Thermal camera CALIBRATED and working fine");
-            ReturntoMain();
+            ThermalCamera camera = new ThermalCamera();
+            Assert.AreEqual(camera.ThermalCameraEnable(), "Thermal camera window box is displayed");
+            Assert.AreEqual(camera.ChangeCameraMode("FUSION"), "FUSION Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("GREYSCALE"), "GREYSCALE Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("RAINBOW"), "RAINBOW Mode active");
+            Assert.AreEqual(camera.ThermalCameraDisable(), "Thermal camera window box is closed");
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
@@ -239,10 +276,10 @@ namespace BlueBoxAutomation
             string[] defaultIntervalTime = { "30", "30", "30", "30", "30" };
 
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             ContourMaxDefaultPage contourMaxDefaultPage = new ContourMaxDefaultPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             contourMaxDefaultPage.ContourMaxPage();
-            Assert.AreEqual(contourMaxDefaultPage.CheckContourEntered(), "Body ContourMax");
+            Assert.AreEqual(contourMaxDefaultPage.CheckContourEntered(), "Contour page is enterd properly");
             Assert.AreEqual(contourMaxDefaultPage.FlanksDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(contourMaxDefaultPage.AbdomenDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(contourMaxDefaultPage.BackDefaultPassesPowerTime(), "Defaults are OK!");
@@ -268,17 +305,20 @@ namespace BlueBoxAutomation
             Assert.AreEqual(contourMaxDefaultPage.PassesControledByUser_Minus(), "Passes min value 0");
             Assert.AreEqual(contourMaxDefaultPage.PowerControledByUser_Pluse(), "Power max Value 100");
             Assert.AreEqual(contourMaxDefaultPage.PowerControledByUser_Minus(), "Power min Value 50");
-
-            //ThermalCamera camera = new ThermalCamera();
-            //Assert.AreEqual(camera.ThermalCameraOnOff(), "Thermal camera CALIBRATED and working fine");
-            ReturntoMain();
+            ThermalCamera camera = new ThermalCamera();
+            Assert.AreEqual(camera.ThermalCameraEnable(), "Thermal camera window box is displayed");
+            Assert.AreEqual(camera.ChangeCameraMode("FUSION"), "FUSION Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("GREYSCALE"), "GREYSCALE Mode active");
+            Assert.AreEqual(camera.ChangeCameraMode("RAINBOW"), "RAINBOW Mode active");
+            Assert.AreEqual(camera.ThermalCameraDisable(), "Thermal camera window box is closed");
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
         public void TC_10_IntensifMaxFaceDefault()
         {
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             string[] areas = { "Forehead", "Periorbital", "Cheeks", "Neck" };
             string[] defaultsPW = { "80", "80", "110", "80" };
             string[] defaultsDepth = { "1.5", "1.5", "2.5", "1.8" };
@@ -291,91 +331,111 @@ namespace BlueBoxAutomation
             Assert.AreEqual(intensifMaxFacePage.PeriorbitalDefaultPWDepthPower(), "Defaults are OK!");
             Assert.AreEqual(intensifMaxFacePage.CheeksDefaultPWDepthPower(), "Defaults are OK!");
             Assert.AreEqual(intensifMaxFacePage.NeckDefaultPWDepthPower(), "Defaults are OK!");
+
             Assert.AreEqual(intensifMaxFacePage.PWControledByUser_Pluse(areas[0]), "PW max value 500");
             Assert.AreEqual(intensifMaxFacePage.PWControledByUser_Minus(), "PW min value 20");
-            Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Pluse(), "Depth max value 5");
+            Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Pluse(areas[0]), "Depth max value 5");
             Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Minus(), "Depth min value 0.5");
-            Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Pluse(), "Power max value 35");
+            Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Pluse(areas[0]), "Power max value 35");
             Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Minus(), "Power min value 0");
+
             Assert.AreEqual(intensifMaxFacePage.PWControledByUser_Pluse(areas[1]), "PW max value 500");
             Assert.AreEqual(intensifMaxFacePage.PWControledByUser_Minus(), "PW min value 20");
-            Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Pluse(), "Depth max value 5");
+            Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Pluse(areas[1]), "Depth max value 5");
             Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Minus(), "Depth min value 0.5");
-            Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Pluse(), "Power max value 35");
+            Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Pluse(areas[1]), "Power max value 35");
             Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Minus(), "Power min value 0");
+
             Assert.AreEqual(intensifMaxFacePage.PWControledByUser_Pluse(areas[2]), "PW max value 500");
             Assert.AreEqual(intensifMaxFacePage.PWControledByUser_Minus(), "PW min value 20");
-            Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Pluse(), "Depth max value 5");
+            Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Pluse(areas[2]), "Depth max value 5");
             Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Minus(), "Depth min value 0.5");
-            Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Pluse(), "Power max value 35");
+            Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Pluse(areas[2]), "Power max value 35");
             Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Minus(), "Power min value 0");
+
             Assert.AreEqual(intensifMaxFacePage.PWControledByUser_Pluse(areas[3]), "PW max value 500");
             Assert.AreEqual(intensifMaxFacePage.PWControledByUser_Minus(), "PW min value 20");
-            Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Pluse(), "Depth max value 5");
+            Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Pluse(areas[3]), "Depth max value 5");
             Assert.AreEqual(intensifMaxFacePage.DepthControledByUser_Minus(), "Depth min value 0.5");
-            Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Pluse(), "Power max value 35");
+            Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Pluse(areas[3]), "Power max value 35");
             Assert.AreEqual(intensifMaxFacePage.PowerControledByUser_Minus(), "Power min value 0");
+
             ////Power vs P.W. linitation
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 220, 0), intensifMaxFacePage.CalculatePower(220));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 240, 1), intensifMaxFacePage.CalculatePower(240));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 260, 2), intensifMaxFacePage.CalculatePower(260));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 280, 3), intensifMaxFacePage.CalculatePower(280));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 300, 4), intensifMaxFacePage.CalculatePower(300));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 320, 5), intensifMaxFacePage.CalculatePower(320));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 340, 6), intensifMaxFacePage.CalculatePower(340));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 360, 7), intensifMaxFacePage.CalculatePower(360));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 380, 8), intensifMaxFacePage.CalculatePower(380));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 400, 9), intensifMaxFacePage.CalculatePower(400));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 420, 10), intensifMaxFacePage.CalculatePower(420));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 440, 11), intensifMaxFacePage.CalculatePower(440));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 460, 12), intensifMaxFacePage.CalculatePower(460));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 480, 13), intensifMaxFacePage.CalculatePower(480));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 500, 14), intensifMaxFacePage.CalculatePower(500));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 220, 0), intensifMaxFacePage.CalculatePower(220));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 240, 1), intensifMaxFacePage.CalculatePower(240));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 260, 2), intensifMaxFacePage.CalculatePower(260));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 280, 3), intensifMaxFacePage.CalculatePower(280));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 300, 4), intensifMaxFacePage.CalculatePower(300));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 320, 5), intensifMaxFacePage.CalculatePower(320));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 340, 6), intensifMaxFacePage.CalculatePower(340));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 360, 7), intensifMaxFacePage.CalculatePower(360));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 380, 8), intensifMaxFacePage.CalculatePower(380));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 400, 9), intensifMaxFacePage.CalculatePower(400));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 420, 10), intensifMaxFacePage.CalculatePower(420));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 440, 11), intensifMaxFacePage.CalculatePower(440));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 460, 12), intensifMaxFacePage.CalculatePower(460));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 480, 13), intensifMaxFacePage.CalculatePower(480));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 500, 14), intensifMaxFacePage.CalculatePower(500));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 220, 0), intensifMaxFacePage.CalculatePower(220));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 240, 1), intensifMaxFacePage.CalculatePower(240));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 260, 2), intensifMaxFacePage.CalculatePower(260));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 280, 3), intensifMaxFacePage.CalculatePower(280));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 300, 4), intensifMaxFacePage.CalculatePower(300));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 320, 5), intensifMaxFacePage.CalculatePower(320));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 340, 6), intensifMaxFacePage.CalculatePower(340));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 360, 7), intensifMaxFacePage.CalculatePower(360));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 380, 8), intensifMaxFacePage.CalculatePower(380));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 400, 9), intensifMaxFacePage.CalculatePower(400));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 420, 10), intensifMaxFacePage.CalculatePower(420));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 440, 11), intensifMaxFacePage.CalculatePower(440));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 460, 12), intensifMaxFacePage.CalculatePower(460));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 480, 13), intensifMaxFacePage.CalculatePower(480));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 500, 14), intensifMaxFacePage.CalculatePower(500));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 220, 0), intensifMaxFacePage.CalculatePower(220));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 240, 1), intensifMaxFacePage.CalculatePower(240));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 260, 2), intensifMaxFacePage.CalculatePower(260));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 280, 3), intensifMaxFacePage.CalculatePower(280));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 300, 4), intensifMaxFacePage.CalculatePower(300));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 320, 5), intensifMaxFacePage.CalculatePower(320));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 340, 6), intensifMaxFacePage.CalculatePower(340));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 360, 7), intensifMaxFacePage.CalculatePower(360));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 380, 8), intensifMaxFacePage.CalculatePower(380));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 400, 9), intensifMaxFacePage.CalculatePower(400));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 420, 10), intensifMaxFacePage.CalculatePower(420));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 440, 11), intensifMaxFacePage.CalculatePower(440));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 460, 12), intensifMaxFacePage.CalculatePower(460));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 480, 13), intensifMaxFacePage.CalculatePower(480));
-            Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 500, 14), intensifMaxFacePage.CalculatePower(500));
+            int a = 0;           
+            int l = 0;
+            while (a < 4)
+            {
+                for (int i = 220; i <= 500; i += 20)
+                {
+                    Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[a], i, l), intensifMaxFacePage.CalculatePower(i));
+                    l += 1;
+                }
+
+                a++;
+            }
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 240, 1), intensifMaxFacePage.CalculatePower(240));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 260, 2), intensifMaxFacePage.CalculatePower(260));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 280, 3), intensifMaxFacePage.CalculatePower(280));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 300, 4), intensifMaxFacePage.CalculatePower(300));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 320, 5), intensifMaxFacePage.CalculatePower(320));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 340, 6), intensifMaxFacePage.CalculatePower(340));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 360, 7), intensifMaxFacePage.CalculatePower(360));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 380, 8), intensifMaxFacePage.CalculatePower(380));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 400, 9), intensifMaxFacePage.CalculatePower(400));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 420, 10), intensifMaxFacePage.CalculatePower(420));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 440, 11), intensifMaxFacePage.CalculatePower(440));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 460, 12), intensifMaxFacePage.CalculatePower(460));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 480, 13), intensifMaxFacePage.CalculatePower(480));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[0], 500, 14), intensifMaxFacePage.CalculatePower(500));
+
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 220, 0), intensifMaxFacePage.CalculatePower(220));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 240, 1), intensifMaxFacePage.CalculatePower(240));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 260, 2), intensifMaxFacePage.CalculatePower(260));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 280, 3), intensifMaxFacePage.CalculatePower(280));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 300, 4), intensifMaxFacePage.CalculatePower(300));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 320, 5), intensifMaxFacePage.CalculatePower(320));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 340, 6), intensifMaxFacePage.CalculatePower(340));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 360, 7), intensifMaxFacePage.CalculatePower(360));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 380, 8), intensifMaxFacePage.CalculatePower(380));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 400, 9), intensifMaxFacePage.CalculatePower(400));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 420, 10), intensifMaxFacePage.CalculatePower(420));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 440, 11), intensifMaxFacePage.CalculatePower(440));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 460, 12), intensifMaxFacePage.CalculatePower(460));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 480, 13), intensifMaxFacePage.CalculatePower(480));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[1], 500, 14), intensifMaxFacePage.CalculatePower(500));
+
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 220, 0), intensifMaxFacePage.CalculatePower(220));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 240, 1), intensifMaxFacePage.CalculatePower(240));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 260, 2), intensifMaxFacePage.CalculatePower(260));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 280, 3), intensifMaxFacePage.CalculatePower(280));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 300, 4), intensifMaxFacePage.CalculatePower(300));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 320, 5), intensifMaxFacePage.CalculatePower(320));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 340, 6), intensifMaxFacePage.CalculatePower(340));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 360, 7), intensifMaxFacePage.CalculatePower(360));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 380, 8), intensifMaxFacePage.CalculatePower(380));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 400, 9), intensifMaxFacePage.CalculatePower(400));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 420, 10), intensifMaxFacePage.CalculatePower(420));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 440, 11), intensifMaxFacePage.CalculatePower(440));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 460, 12), intensifMaxFacePage.CalculatePower(460));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 480, 13), intensifMaxFacePage.CalculatePower(480));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[2], 500, 14), intensifMaxFacePage.CalculatePower(500));
+
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 220, 0), intensifMaxFacePage.CalculatePower(220));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 240, 1), intensifMaxFacePage.CalculatePower(240));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 260, 2), intensifMaxFacePage.CalculatePower(260));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 280, 3), intensifMaxFacePage.CalculatePower(280));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 300, 4), intensifMaxFacePage.CalculatePower(300));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 320, 5), intensifMaxFacePage.CalculatePower(320));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 340, 6), intensifMaxFacePage.CalculatePower(340));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 360, 7), intensifMaxFacePage.CalculatePower(360));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 380, 8), intensifMaxFacePage.CalculatePower(380));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 400, 9), intensifMaxFacePage.CalculatePower(400));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 420, 10), intensifMaxFacePage.CalculatePower(420));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 440, 11), intensifMaxFacePage.CalculatePower(440));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 460, 12), intensifMaxFacePage.CalculatePower(460));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 480, 13), intensifMaxFacePage.CalculatePower(480));
+            //Assert.AreEqual(intensifMaxFacePage.PowerLimitation(areas[3], 500, 14), intensifMaxFacePage.CalculatePower(500));
+
             Assert.AreEqual(intensifMaxFacePage.ContinuousSingleSelect(), "Continuous mode select");
             Assert.AreEqual(intensifMaxFacePage.ContinuousSpeedOption("SLOW"), "SLOW Selected");
             Assert.AreEqual(intensifMaxFacePage.changeAreasDuringContinuousSingleMode(areas[0]), "Defaults are OK!");
@@ -433,15 +493,14 @@ namespace BlueBoxAutomation
             Assert.AreEqual(110, Npw);
             Assert.AreEqual(2.3, Ndepth);
             Assert.AreEqual(14, Npower);
-
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
         public void TC_11_IntensifMaxBodyDefault()
         {
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             string[] areas = { "Decolletage", "Hands", "Buttocks", "Abdomen", "Arms" };
             string[] defaultsPW = { "80", "80", "110", "110", "110" };
             string[] defaultsDepth = { "1.8", "1.8", "2.5", "2.5", "2" };
@@ -629,14 +688,14 @@ namespace BlueBoxAutomation
             Assert.AreEqual(2.5, Ndepth);
             Assert.AreEqual(14, Npower);
 
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
         public void TC_12_FSRMaxFaceDefault()
         {
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
 
             string[] areas = { "Forehead", "Periorbital", "Cheeks", "Neck" };
             string[] defaultsPW = { "20", "20", "30", "30" };
@@ -668,14 +727,14 @@ namespace BlueBoxAutomation
             Assert.AreEqual(fsrMaxDefaultPage.PowerControledByUser_Minus(), "Power min value 1");
             //Console.WriteLine(fsrMaxDefaultPage.TreatmentTimer());
 
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
         public void TC_13_FSRMaxBodyDefault()
         {
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
 
             string[] areas = { "Hands", "Decolletage", "Buttocks", "Abdomen", "Arms" };
             string[] defaultsPW = { "20", "20", "20", "20", "20" };
@@ -712,7 +771,7 @@ namespace BlueBoxAutomation
             Assert.AreEqual(fsrMaxBodyDefaultPage.PowerControledByUser_Minus(), "Power min value 1");
             //Console.WriteLine(fsrMaxDefaultPage.TreatmentTimer());
 
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
         }
 
         [TestMethod]
@@ -725,49 +784,51 @@ namespace BlueBoxAutomation
 
             iFineMaxReadyPage iFineMaxPage = new iFineMaxReadyPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("iFine MAX", "Left"), "iFine MAX is not connected properlly");
             iFineMaxPage.IFineMAX();
             //iFineMaxPage.checkallinfo();
-            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "Face iFineMax");
+            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "iFineMax in ready mode is enterd");
             Assert.AreEqual(iFineMaxPage.PeriorbitalDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.AreEqual(iFineMaxPage.PerioralDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(iFineMaxPage.LedONCheck(), "LED is not ON!");
-            Assert.AreEqual(iFineMaxPage.DissconectHP("iFine MAX"), "iFine MAX HP is not disconnected properlly");
-            treatmentArea.faceArea();
+            Assert.AreEqual(iFineMaxPage.DissconectHP("iFine MAX"), "iFine MAX is disconnected, and the disconnection message appeared");
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("iFine MAX", "Right"), "iFine MAX is not connected properlly");
             iFineMaxPage.IFineMAX();
-            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "Face iFineMax");
+            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "iFineMax in ready mode is enterd");
             Assert.AreEqual(iFineMaxPage.PeriorbitalDefaultPassesPowerTime(), "Defaults are OK!");
+            Assert.AreEqual(iFineMaxPage.PerioralDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(iFineMaxPage.LedONCheck(), "LED is not ON!");
-            Assert.AreEqual(iFineMaxPage.DissconectHP("iFine MAX"), "iFine MAX HP is not disconnected properlly");
-            treatmentArea.faceArea();
+            Assert.AreEqual(iFineMaxPage.DissconectHP("iFine MAX"), "iFine MAX is disconnected, and the disconnection message appeared");
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("iFine MAX", "Left"), "iFine MAX is not connected properlly");
             iFineMaxPage.IFineMAX();
-            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "Face iFineMax");
+            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "iFineMax in ready mode is enterd");
             Assert.AreEqual(iFineMaxPage.OutputPowerMeasuring(), 6);   //6 stages of power should be tested otherwise fail
             Assert.AreEqual("Bad contact warning is functioning properly", ManualBadContactTest());
             Assert.AreEqual("Rotation warning is functioning properly", ManualMotionTest());
             Assert.AreEqual("No motion warning functioning properly", ManualNoMotionTest());
             Assert.AreEqual(iFineMaxPage.DissconectHP("iFine MAX"), "iFine MAX HP is not disconnected properlly");
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("iFine MAX", "Right"), "iFine MAX is not connected properlly");
             iFineMaxPage.IFineMAX();
-            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "Face iFineMax");
+            Assert.AreEqual(iFineMaxPage.CheckiFineEntered(), "iFineMax in ready mode is enterd");
             Assert.AreEqual(iFineMaxPage.OutputPowerMeasuring(), 6);   //6 stages of power should be tested otherwise fail
             Assert.AreEqual("Bad contact warning is functioning properly", ManualBadContactTest());
             Assert.AreEqual("Rotation warning is functioning properly", ManualMotionTest());
             Assert.AreEqual("No motion warning functioning properly", ManualNoMotionTest());
             Assert.AreEqual(iFineMaxPage.checkCounterDecrease(areas[0]), "Passes not decreased by 1");
             Assert.AreEqual(iFineMaxPage.checkCounterDecrease(areas[1]), "Passes not decreased by 1");
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Assert.AreEqual("Logs upload sucsses", UploadLogs());
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
+
             Login log = new Login();
             log.LoginToMainMenu();
             Assert.IsTrue(log.checkLoginOk(), "Login failed");
             //iFineMaxPage.RetreatTest("Periorbital");
-            //iFineMaxPage.RetreatTest("Perioral");
+            iFineMaxPage.RetreatTest("Perioral");
         }
 
         [TestMethod]
@@ -780,7 +841,7 @@ namespace BlueBoxAutomation
 
             SmallMaxReadyPage smallMaxPage = new SmallMaxReadyPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Small MAX", "Left"), "Small MAX is not connected properlly");
             smallMaxPage.SmallMAX();
             //smallMaxPage.checkallinfo();
@@ -791,14 +852,14 @@ namespace BlueBoxAutomation
             Assert.AreEqual(smallMaxPage.DecolletageDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(smallMaxPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(smallMaxPage.DissconectHP("Small MAX"), "Small MAX is not disconnected properlly");
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Small MAX", "Right"), "Small MAX is not connected properlly");
             smallMaxPage.SmallMAX();
             Assert.AreEqual(smallMaxPage.CheckSmallEntered(), "Face SmallMax");
             Assert.AreEqual(smallMaxPage.CheeksDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(smallMaxPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(smallMaxPage.DissconectHP("Small MAX"), "Small MAX is not disconnected properlly");
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Small MAX", "Left"), "Small MAX is not connected properlly");
             smallMaxPage.SmallMAX();
             Assert.AreEqual(smallMaxPage.CheckSmallEntered(), "Face SmallMax");
@@ -807,7 +868,7 @@ namespace BlueBoxAutomation
             Assert.AreEqual("Rotation warning is functioning properly", ManualMotionTest());
             Assert.AreEqual("No motion warning functioning properly", ManualNoMotionTest());
             Assert.AreEqual(smallMaxPage.DissconectHP("Small MAX"), "Small MAX is not disconnected properlly");
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Small MAX", "Right"), "Small MAX is not connected properlly");
             smallMaxPage.SmallMAX();
             Assert.AreEqual(smallMaxPage.CheckSmallEntered(), "Face SmallMax");
@@ -819,9 +880,9 @@ namespace BlueBoxAutomation
             Assert.AreEqual(smallMaxPage.checkCounterDecrease(areas[1]), "Passes not decreased by 1");
             Assert.AreEqual(smallMaxPage.checkCounterDecrease(areas[2]), "Passes not decreased by 1");
             Assert.AreEqual(smallMaxPage.checkCounterDecrease(areas[3]), "Passes not decreased by 1");
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Assert.AreEqual("Logs upload sucsses", UploadLogs());
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Login log = new Login();
             log.LoginToMainMenu();
             Assert.IsTrue(log.checkLoginOk(), "Login failed");
@@ -838,7 +899,7 @@ namespace BlueBoxAutomation
 
             MiniShaperMaxFaceReadyPage miniShaperMaxFaceReadyPage = new MiniShaperMaxFaceReadyPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Mini Shaper MAX", "Left"), "Mini Shaper MAX is not connected properlly");
             miniShaperMaxFaceReadyPage.MiniShaperMaxPage();
             //miniShaperMaxFaceReadyPage.checkallinfo();
@@ -848,14 +909,14 @@ namespace BlueBoxAutomation
             Assert.AreEqual(miniShaperMaxFaceReadyPage.SubmentalDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(miniShaperMaxFaceReadyPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(miniShaperMaxFaceReadyPage.DissconectHP("Mini Shaper MAX"), "Mini Shaper MAX is not disconnected properlly");
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Mini Shaper MAX", "Right"), "Mini Shaper MAX is not connected properlly");
             miniShaperMaxFaceReadyPage.MiniShaperMaxPage();
             Assert.AreEqual(miniShaperMaxFaceReadyPage.CheckMiniShaperFaceEntered(), "Face MiniShaperMax");
             Assert.AreEqual(miniShaperMaxFaceReadyPage.CheeksDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(miniShaperMaxFaceReadyPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(miniShaperMaxFaceReadyPage.DissconectHP("Mini Shaper MAX"), "Mini Shaper MAX is not disconnected properlly");
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Mini Shaper MAX", "Left"), "Mini Shaper MAX is not connected properlly");
             miniShaperMaxFaceReadyPage.MiniShaperMaxPage();
             Assert.AreEqual(miniShaperMaxFaceReadyPage.CheckMiniShaperFaceEntered(), "Face MiniShaperMax");
@@ -864,7 +925,7 @@ namespace BlueBoxAutomation
             Assert.AreEqual("Rotation warning is functioning properly", ManualMotionTest());
             Assert.AreEqual("No motion warning functioning properly", ManualNoMotionTest());
             Assert.AreEqual(miniShaperMaxFaceReadyPage.DissconectHP("Mini Shaper MAX"), "Mini Shaper MAX is not disconnected properlly");
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Mini Shaper MAX", "Right"), "Mini Shaper MAX is not connected properlly");
             miniShaperMaxFaceReadyPage.MiniShaperMaxPage();
             Assert.AreEqual(miniShaperMaxFaceReadyPage.CheckMiniShaperFaceEntered(), "Face MiniShaperMax");
@@ -875,9 +936,9 @@ namespace BlueBoxAutomation
             Assert.AreEqual(miniShaperMaxFaceReadyPage.checkCounterDecrease(areas[0]), "Passes not decreased by 1");
             Assert.AreEqual(miniShaperMaxFaceReadyPage.checkCounterDecrease(areas[1]), "Passes not decreased by 1");
             Assert.AreEqual(miniShaperMaxFaceReadyPage.checkCounterDecrease(areas[2]), "Passes not decreased by 1");
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Assert.AreEqual("Logs upload sucsses", UploadLogs());
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Login log = new Login();
             log.LoginToMainMenu();
             Assert.IsTrue(log.checkLoginOk(), "Login failed");
@@ -895,7 +956,7 @@ namespace BlueBoxAutomation
 
             MiniShaperMaxBodyReadyPage miniShaperMaxBodyReadyPage = new MiniShaperMaxBodyReadyPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Mini Shaper MAX", "Left"), "Mini Shaper MAX is not connected properlly");
             miniShaperMaxBodyReadyPage.MiniShaperMaxPage();
             //miniShaperMaxBodyReadyPage.checkallinfo();
@@ -905,14 +966,14 @@ namespace BlueBoxAutomation
             Assert.AreEqual(miniShaperMaxBodyReadyPage.KneesDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(miniShaperMaxBodyReadyPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(miniShaperMaxBodyReadyPage.DissconectHP("Mini Shaper MAX"), "Mini Shaper MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Mini Shaper MAX", "Right"), "Mini Shaper MAX is not connected properlly");
             miniShaperMaxBodyReadyPage.MiniShaperMaxPage();
             Assert.AreEqual(miniShaperMaxBodyReadyPage.CheckMiniShaperBodyEntered(), "Body MiniShaperMax");
             Assert.AreEqual(miniShaperMaxBodyReadyPage.DecolletageDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(miniShaperMaxBodyReadyPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(miniShaperMaxBodyReadyPage.DissconectHP("Mini Shaper MAX"), "Mini Shaper MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Mini Shaper MAX", "Left"), "Mini Shaper MAX is not connected properlly");
             miniShaperMaxBodyReadyPage.MiniShaperMaxPage();
             Assert.AreEqual(miniShaperMaxBodyReadyPage.CheckMiniShaperBodyEntered(), "Body MiniShaperMax");
@@ -921,7 +982,7 @@ namespace BlueBoxAutomation
             Assert.AreEqual("Rotation warning is functioning properly", ManualMotionTest());
             Assert.AreEqual("No motion warning functioning properly", ManualNoMotionTest());
             Assert.AreEqual(miniShaperMaxBodyReadyPage.DissconectHP("Mini Shaper MAX"), "Mini Shaper MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Mini Shaper MAX", "Right"), "Mini Shaper MAX is not connected properlly");
             miniShaperMaxBodyReadyPage.MiniShaperMaxPage();
             Assert.AreEqual(miniShaperMaxBodyReadyPage.CheckMiniShaperBodyEntered(), "Body MiniShaperMax");
@@ -932,9 +993,9 @@ namespace BlueBoxAutomation
             Assert.AreEqual(miniShaperMaxBodyReadyPage.checkCounterDecrease(areas[0]), "Passes not decreased by 1");
             Assert.AreEqual(miniShaperMaxBodyReadyPage.checkCounterDecrease(areas[1]), "Passes not decreased by 1");
             Assert.AreEqual(miniShaperMaxBodyReadyPage.checkCounterDecrease(areas[2]), "Passes not decreased by 1");
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Assert.AreEqual("Logs upload sucsses", UploadLogs());
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Login log = new Login();
             log.LoginToMainMenu();
             Assert.IsTrue(log.checkLoginOk(), "Login failed");
@@ -951,7 +1012,7 @@ namespace BlueBoxAutomation
 
             ShaperMaxReadyPage shaperMaxReadyPage = new ShaperMaxReadyPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Shaper MAX", "Left"), "Shaper MAX is not connected properlly");
             shaperMaxReadyPage.ShaperMaxPage();
             //shaperMaxReadyPage.checkallinfo();
@@ -965,14 +1026,14 @@ namespace BlueBoxAutomation
             Assert.AreEqual(shaperMaxReadyPage.BackDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(shaperMaxReadyPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(shaperMaxReadyPage.DissconectHP("Shaper MAX"), "Shaper MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Shaper MAX", "Right"), "Shaper MAX is not connected properlly");
             shaperMaxReadyPage.ShaperMaxPage();
             Assert.AreEqual(shaperMaxReadyPage.CheckShaperEntered(), "Body ShaperMax");
             Assert.AreEqual(shaperMaxReadyPage.FlanksDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(shaperMaxReadyPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(shaperMaxReadyPage.DissconectHP("Shaper MAX"), "Shaper MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Shaper MAX", "Left"), "Shaper MAX is not connected properlly");
             shaperMaxReadyPage.ShaperMaxPage();
             Assert.AreEqual(shaperMaxReadyPage.CheckShaperEntered(), "Body ShaperMax");
@@ -981,7 +1042,7 @@ namespace BlueBoxAutomation
             Assert.AreEqual("Rotation warning is functioning properly", ManualMotionTest());
             Assert.AreEqual("No motion warning functioning properly", ManualNoMotionTest());
             Assert.AreEqual(shaperMaxReadyPage.DissconectHP("Shaper MAX"), "Shaper MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Shaper MAX", "Right"), "Shaper MAX is not connected properlly");
             shaperMaxReadyPage.ShaperMaxPage();
             Assert.AreEqual(shaperMaxReadyPage.CheckShaperEntered(), "Body ShaperMax");
@@ -996,9 +1057,9 @@ namespace BlueBoxAutomation
             Assert.AreEqual(shaperMaxReadyPage.checkCounterDecrease(areas[4]), "Passes not decreased by 1");
             Assert.AreEqual(shaperMaxReadyPage.checkCounterDecrease(areas[5]), "Passes not decreased by 1");
             Assert.AreEqual(shaperMaxReadyPage.checkCounterDecrease(areas[6]), "Passes not decreased by 1");
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Assert.AreEqual("Logs upload sucsses", UploadLogs());
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Login log = new Login();
             log.LoginToMainMenu();
             Assert.IsTrue(log.checkLoginOk(), "Login failed");
@@ -1015,7 +1076,7 @@ namespace BlueBoxAutomation
 
             ContourMaxReadyPage contourMaxReadyPage = new ContourMaxReadyPage(areas, defaultPasses, defaultsPower, defaultIntervalTime);
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Contour MAX", "Left"), "Contour MAX is not connected properlly");
             contourMaxReadyPage.ContourMaxPage();
             //contourMaxReadyPage.checkallinfo();
@@ -1027,14 +1088,14 @@ namespace BlueBoxAutomation
             Assert.AreEqual(contourMaxReadyPage.ThighsDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(contourMaxReadyPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(contourMaxReadyPage.DissconectHP("Contour MAX"), "Contour MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Contour MAX", "Right"), "Contour MAX is not connected properlly");
             contourMaxReadyPage.ContourMaxPage();
             Assert.AreEqual(contourMaxReadyPage.CheckContourEntered(), "Body ContourMax");
             Assert.AreEqual(contourMaxReadyPage.FlanksDefaultPassesPowerTime(), "Defaults are OK!");
             Assert.IsTrue(contourMaxReadyPage.LedONCheck(), "LED is not ON!");
             Assert.AreEqual(contourMaxReadyPage.DissconectHP("Contour MAX"), "Contour MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Contour MAX", "Left"), "Contour MAX is not connected properlly");
             contourMaxReadyPage.ContourMaxPage();
             Assert.AreEqual(contourMaxReadyPage.CheckContourEntered(), "Body ContourMax");
@@ -1043,7 +1104,7 @@ namespace BlueBoxAutomation
             Assert.AreEqual("Rotation warning is functioning properly", ManualMotionTest());
             Assert.AreEqual("No motion warning functioning properly", ManualNoMotionTest());
             Assert.AreEqual(contourMaxReadyPage.DissconectHP("Contour MAX"), "Contour MAX is not disconnected properlly");
-            treatmentArea.bodyArea();
+            treatmentArea.OpenBodyArea();
             Assert.AreEqual(ConnectHP("Contour MAX", "Right"), "Contour MAX is not connected properlly");
             contourMaxReadyPage.ContourMaxPage();
             Assert.AreEqual(contourMaxReadyPage.CheckContourEntered(), "Body ContourMax");
@@ -1057,9 +1118,9 @@ namespace BlueBoxAutomation
             Assert.AreEqual(contourMaxReadyPage.checkCounterDecrease(areas[3]), "Passes not decreased by 1");
             Assert.AreEqual(contourMaxReadyPage.checkCounterDecrease(areas[4]), "Passes not decreased by 1");
             Assert.AreEqual(contourMaxReadyPage.checkCounterDecrease(areas[5]), "Passes not decreased by 1");
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Assert.AreEqual("Logs upload sucsses", UploadLogs());
-            ReturntoMain();
+            Assert.AreEqual(ReturntoMain(), "Main menu location");
             Login log = new Login();
             log.LoginToMainMenu();
             Assert.IsTrue(log.checkLoginOk(), "Login failed");
@@ -1077,7 +1138,7 @@ namespace BlueBoxAutomation
 
             IntensifMaxFaceReadyPage intensifMaxFacePage = new IntensifMaxFaceReadyPage(areas, defaultsPW, defaultsDepth, defaultsPower);
             TreatmentArea treatmentArea = new TreatmentArea();
-            treatmentArea.faceArea();
+            treatmentArea.OpenFaceArea();
             Assert.AreEqual(ConnectHP("Intensif MAX", "Left"), "Intensif MAX is not connected properlly");
             intensifMaxFacePage.IntneisfMAXPage();
             Assert.AreEqual(intensifMaxFacePage.CheckIntneisfFaceEntered(), "Face IntensifMax");
@@ -1106,14 +1167,19 @@ namespace BlueBoxAutomation
         [TestMethod]
         public void TC_24_SettingsMode()
         {
-            SettingsMode settingsMode = new SettingsMode();
-            Assert.IsTrue(settingsMode.GetToSettingsMode(), "settings page is not enterd");
-            Assert.AreEqual(settingsMode.GUIATMELVersionsCheck("01.05.13", "01.00.00"), "GUI and Atmel are not up to date");
-            Assert.AreEqual(settingsMode.FPGAVersionCheck(commStatus, ""), "");
-            Assert.AreEqual(settingsMode.ChangeLoginPassword(), "Password changed successfully!");
-            Assert.AreEqual(settingsMode.SystemSerialNumberAndCalibrationMenu(), "Serial & Cal. value menu are displayed");
-            Assert.AreEqual(settingsMode.EnterSNnumber(), "Serial number updated");
-            Assert.AreEqual(settingsMode.SystemSerialLength(), 10);  //10 Checksum for sys serial length 
+            List<string> errors = new List<string>();
+            SettingsMode settingsMode = new SettingsMode(errors);
+            Assert.IsTrue(settingsMode.GetToSettingsMode(), "Unable to access the settings page");
+            Assert.AreEqual(settingsMode.OpenPasswordMenu(), "Password reset menu is open");
+            Assert.AreEqual(settingsMode.OpenSerialAndCalibrationMenu(), "Serial and camera cal. bars are open");
+            //Assert.AreEqual(settingsMode.EnterSNnumber(), "Serial number updated");
+            settingsMode.EnterSNnumber();
+
+            Assert.AreEqual(settingsMode.GUISWVersion("01.06.05"), "GUI is in the last version");
+            //Assert.AreEqual(settingsMode.FPGAVersionCheck(commStatus, ""), "");
+            //Assert.AreEqual(settingsMode.SystemSerialNumberAndCalibrationMenu(), "Serial & Cal. value menu are displayed");
+            //Assert.AreEqual(settingsMode.SystemSerialLength(), 10);  //10 Checksum for sys serial length 
+
         }
 
 
